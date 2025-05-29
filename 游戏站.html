@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub - 免费在线游戏平台 | 最新热门小游戏</title>
+    <meta name="description" content="GameHub提供数千款免费在线游戏，包括动作、益智、射击、策略等类型。无需下载，即点即玩！">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        /* Header */
+        .header {
+            background: #1a1a2e;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+        
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #00ff88;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            background: #00ff88;
+            color: #1a1a2e;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,255,136,0.3);
+        }
+        
+        /* Featured Games Carousel */
+        .featured-section {
+            padding: 3rem 0;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a1a2e;
+        }
+        
+        .featured-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .game-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .game-card:hover .play-icon {
+            opacity: 1;
+        }
+        
+        .game-info {
+            padding: 1.5rem;
+        }
+        
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+        
+        .game-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stars {
+            color: #ffd700;
+        }
+        
+        .play-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            padding: 3rem 0;
+            background: #f8f9fa;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Trending Games */
+        .trending-section {
+            padding: 3rem 0;
+            background: white;
+        }
+        
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .trending-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .trending-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .trending-thumbnail {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+        
+        .trending-info {
+            padding: 1rem;
+        }
+        
+        .trending-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .trending-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #00ff88;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            text-align: center;
+            color: #666;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .search-bar {
+                margin: 0;
+                max-width: none;
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .featured-carousel,
+            .trending-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* SEO优化的结构化数据样式 */
+        .breadcrumb {
+            background: #e9ecef;
+            padding: 1rem 0;
+        }
+        
+        .breadcrumb-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb-nav a {
+            color: #666;
+            text-decoration: none;
+            margin-right: 0.5rem;
+        }
+        
+        .breadcrumb-nav a:hover {
+            color: #1a1a2e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">🎮 GameHub</div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="搜索游戏...">
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#categories">分类</a></li>
+                    <li><a href="#trending">热门</a></li>
+                    <li><a href="#new">最新</a></li>
+                    <li><a href="#blog">攻略</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb (SEO) -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <a href="/">首页</a> > <span>在线游戏</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>🎯 最棒的免费在线游戏平台</h1>
+            <p>超过10000款精选游戏，无需下载，即点即玩！涵盖动作、策略、益智、射击等各类游戏</p>
+            <button class="cta-button">🚀 开始游戏</button>
+        </div>
+    </section>
+
+    <!-- Featured Games -->
+    <section class="featured-section" id="featured">
+        <div class="container">
+            <h2 class="section-title">🔥 精选推荐</h2>
+            <div class="featured-carousel">
+                <!-- Game Card 1 -->
+                <div class="game-card" itemscope itemtype="https://schema.org/Game">
+                    <div class="game-thumbnail">
+                        <span>超级冒险</span>
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title" itemprop="name">超级冒险岛</h3>
+                        <p class="game-description" itemprop="description">经典的横版过关游戏，带你重温童年回忆</p>
+                        <div class="game-stats">
+                            <div class="rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span>4.8</span>
+                            </div>
+                            <div class="play-count">已玩 15.2万次</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 2 -->
+                <div class="game-card" itemscope itemtype="https://schema.org/Game">
+                    <div class="game-thumbnail">
+                        <span>战争策略</span>
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title" itemprop="name">王国保卫战</h3>
+                        <p class="game-description" itemprop="description">史诗级策略塔防游戏，考验你的智慧与战术</p>
+                        <div class="game-stats">
+                            <div class="rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span>4.9</span>
+                            </div>
+                            <div class="play-count">已玩 23.8万次</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 3 -->
+                <div class="game-card" itemscope itemtype="https://schema.org/Game">
+                    <div class="game-thumbnail">
+                        <span>益智解谜</span>
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title" itemprop="name">2048进化版</h3>
+                        <p class="game-description" itemprop="description">经典数字游戏的全新演绎，更多挑战等你来</p>
+                        <div class="game-stats">
+                            <div class="rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span>4.7</span>
+                            </div>
+                            <div class="play-count">已玩 31.1万次</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <h2 class="section-title">🎮 游戏分类</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">⚔️</div>
+                    <div class="category-name">动作游戏</div>
+                    <div class="category-count">1,234款游戏</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🧩</div>
+                    <div class="category-name">益智解谜</div>
+                    <div class="category-count">856款游戏</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🏰</div>
+                    <div class="category-name">策略游戏</div>
+                    <div class="category-count">672款游戏</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🏃</div>
+                    <div class="category-name">跑酷游戏</div>
+                    <div class="category-count">498款游戏</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🎯</div>
+                    <div class="category-name">射击游戏</div>
+                    <div class="category-count">723款游戏</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🏁</div>
+                    <div class="category-name">竞速游戏</div>
+                    <div class="category-count">345款游戏</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Games -->
+    <section class="trending-section" id="trending">
+        <div class="container">
+            <h2 class="section-title">📈 今日热门</h2>
+            <div class="trending-grid">
+                <div class="trending-card">
+                    <div class="trending-thumbnail">热门游戏1</div>
+                    <div class="trending-info">
+                        <h4 class="trending-title">忍者跑酷</h4>
+                        <div class="trending-meta">
+                            <span>⭐ 4.6</span>
+                            <span>🔥 +25%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-card">
+                    <div class="trending-thumbnail">热门游戏2</div>
+                    <div class="trending-info">
+                        <h4 class="trending-title">魔法消除</h4>
+                        <div class="trending-meta">
+                            <span>⭐ 4.8</span>
+                            <span>🔥 +18%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-card">
+                    <div class="trending-thumbnail">热门游戏3</div>
+                    <div class="trending-info">
+                        <h4 class="trending-title">城市赛车</h4>
+                        <div class="trending-meta">
+                            <span>⭐ 4.5</span>
+                            <span>🔥 +31%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="trending-card">
+                    <div class="trending-thumbnail">热门游戏4</div>
+                    <div class="trending-info">
+                        <h4 class="trending-title">太空大战</h4>
+                        <div class="trending-meta">
+                            <span>⭐ 4.7</span>
+                            <span>🔥 +22%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>游戏分类</h3>
+                <ul>
+                    <li><a href="/games/action">动作游戏</a></li>
+                    <li><a href="/games/puzzle">益智游戏</a></li>
+                    <li><a href="/games/strategy">策略游戏</a></li>
+                    <li><a href="/games/racing">竞速游戏</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>热门标签</h3>
+                <ul>
+                    <li><a href="/tags/multiplayer">多人在线</a></li>
+                    <li><a href="/tags/html5">HTML5游戏</a></li>
+                    <li><a href="/tags/mobile">手机游戏</a></li>
+                    <li><a href="/tags/3d">3D游戏</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>帮助与支持</h3>
+                <ul>
+                    <li><a href="/help">游戏帮助</a></li>
+                    <li><a href="/contact">联系我们</a></li>
+                    <li><a href="/feedback">用户反馈</a></li>
+                    <li><a href="/report">举报游戏</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>关于我们</h3>
+                <ul>
+                    <li><a href="/about">关于GameHub</a></li>
+                    <li><a href="/privacy">隐私政策</a></li>
+                    <li><a href="/terms">使用条款</a></li>
+                    <li><a href="/sitemap">网站地图</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GameHub. 专业的免费在线游戏平台 | 让游戏更有趣</p>
+        </div>
+    </footer>
+
+    <!-- 结构化数据用于SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "GameHub",
+        "description": "专业的免费在线游戏平台，提供数千款精品游戏",
+        "url": "https://gamehub.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://gamehub.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</body>
+</html>
