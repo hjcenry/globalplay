@@ -44,7 +44,7 @@ export default function HomePage() {
       {/* Categories */}
       <section className="categories-section">
         <div className="container">
-          <h2 className="section-title">🎮 Game Categories</h2>
+          <h2 className="section-title" id="categories">🎮 Game Categories</h2>
           <div className="categories-grid">
             {categories.map((category) => (
               <Link
@@ -64,7 +64,7 @@ export default function HomePage() {
       {/* Trending Games */}
       <section className="trending-section">
         <div className="container">
-          <h2 className="section-title">📈 Trending Today</h2>
+          <h2 className="section-title" id="trending">📈 Trending Today</h2>
           <div className="trending-grid">
             {trendingGames.map((game) => (
               <GameCard key={game.id} game={game} showPlayIcon={false} showImage={true} />

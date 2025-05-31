@@ -16,19 +16,19 @@ export default function Footer() {
         <div className="footer-section">
           <h3>Popular Tags</h3>
           <ul>
-            <li><Link href="/tags/multiplayer">Multiplayer</Link></li>
-            <li><Link href="/tags/html5">HTML5 Games</Link></li>
-            <li><Link href="/tags/mobile">Mobile Games</Link></li>
-            <li><Link href="/tags/3d">3D Games</Link></li>
+            <li><Link href="/">Multiplayer</Link></li>
+            <li><Link href="/">HTML5 Games</Link></li>
+            <li><Link href="/">Mobile Games</Link></li>
+            <li><Link href="/">3D Games</Link></li>
           </ul>
         </div>
         <div className="footer-section">
           <h3>Help & Support</h3>
           <ul>
             <li><Link href="/help">Game Help</Link></li>
-            <li><Link href="/contact">Contact Us</Link></li>
-            <li><Link href="/feedback">Feedback</Link></li>
-            <li><Link href="/report">Report Issue</Link></li>
+            <li><Link href="/">Contact Us</Link></li>
+            <li><Link href="/">Feedback</Link></li>
+            <li><Link href="/">Report Issue</Link></li>
           </ul>
         </div>
         <div className="footer-section">

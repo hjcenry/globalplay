@@ -13,7 +13,7 @@ export default function GameCard({ game, showPlayIcon = true, showImage = true }
     if (count >= 1000000) {
       return `${(count / 1000000).toFixed(1)}M`;
     } else if (count >= 1000) {
-      return `${(count / 1000).toFixed(1)}万`;
+      return `${(count / 1000).toFixed(1)}K`;
     }
     return count.toString();
   };
@@ -61,7 +61,7 @@ export default function GameCard({ game, showPlayIcon = true, showImage = true }
               <span>{game.rating}</span>
             </div>
             <div className="play-count">
-              已玩 {formatPlayCount(game.playCount)}次
+              Played {formatPlayCount(game.playCount)} times
             </div>
           </div>
         </div>

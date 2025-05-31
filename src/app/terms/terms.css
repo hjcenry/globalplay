@@ -1,0 +1,791 @@
+.terms-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.terms-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  color: white;
+}
+
+.terms-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.terms-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.last-updated {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.terms-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.terms-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.terms-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.terms-section h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+
+.terms-section h3 {
+  color: #34495e;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.terms-section h4 {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.terms-section p {
+  color: #555;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.terms-section ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.terms-section li {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+/* Agreement Box */
+.agreement-box {
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  border-left: 4px solid #3498db;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.agreement-box h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.agreement-box ul {
+  margin: 0;
+}
+
+.agreement-box li {
+  color: #444;
+}
+
+/* Eligibility Content */
+.eligibility-content {
+  margin-bottom: 2rem;
+}
+
+.account-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.rule-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 3px solid #3498db;
+  transition: all 0.3s ease;
+}
+
+.rule-item:hover {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+  transform: translateY(-2px);
+}
+
+.rule-item h4 {
+  margin-bottom: 0.8rem;
+  color: #2c3e50;
+}
+
+.rule-item ul {
+  margin: 0;
+}
+
+.rule-item li {
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Service Grid */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.service-card {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.service-card:hover {
+  background: #fff;
+  border-color: #3498db;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.service-card h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.service-card ul {
+  text-align: left;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.service-card li {
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Usage Policy */
+.usage-policy {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.allowed-uses {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.allowed-uses h3 {
+  color: #155724;
+  margin-bottom: 1rem;
+}
+
+.allowed-uses ul {
+  margin: 0;
+}
+
+.allowed-uses li {
+  color: #155724;
+}
+
+.prohibited-uses {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.prohibited-uses h3 {
+  color: #721c24;
+  margin-bottom: 1rem;
+}
+
+.prohibition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.prohibition-item {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 3px solid #dc3545;
+}
+
+.prohibition-item h4 {
+  color: #721c24;
+  margin-bottom: 0.8rem;
+}
+
+.prohibition-item ul {
+  margin: 0;
+}
+
+.prohibition-item li {
+  color: #721c24;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Content Policy */
+.content-policy {
+  margin-bottom: 2rem;
+}
+
+.content-rights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.user-rights,
+.platform-rights {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.user-rights {
+  border-left: 4px solid #28a745;
+}
+
+.platform-rights {
+  border-left: 4px solid #007bff;
+}
+
+.user-rights h4 {
+  color: #155724;
+}
+
+.platform-rights h4 {
+  color: #004085;
+}
+
+.content-guidelines {
+  margin-top: 2rem;
+}
+
+.guideline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.guideline-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 3px solid #ffc107;
+}
+
+.guideline-item h4 {
+  color: #856404;
+  margin-bottom: 0.8rem;
+}
+
+.guideline-item ul {
+  margin: 0;
+}
+
+.guideline-item li {
+  color: #856404;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+/* IP Content */
+.ip-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.our-ip,
+.game-ip {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.our-ip {
+  border-left: 4px solid #6f42c1;
+}
+
+.game-ip {
+  border-left: 4px solid #fd7e14;
+}
+
+.ip-respect {
+  margin-top: 1.5rem;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+/* Disclaimers */
+.disclaimers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.disclaimer-box {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.disclaimer-box p {
+  margin: 0;
+  color: #856404;
+}
+
+.liability-limits {
+  margin-top: 2rem;
+}
+
+.liability-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.liability-item {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.liability-item:hover {
+  background: #fff;
+  border-color: #dc3545;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(220, 53, 69, 0.2);
+}
+
+.liability-item h4 {
+  color: #2c3e50;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.liability-item p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Termination Policy */
+.termination-policy {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.user-termination,
+.platform-termination {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.user-termination {
+  border-left: 4px solid #28a745;
+}
+
+.platform-termination {
+  border-left: 4px solid #dc3545;
+}
+
+.termination-reasons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.reason-item {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.reason-item h4 {
+  margin-bottom: 0.8rem;
+}
+
+.reason-item ul {
+  margin: 0;
+}
+
+.reason-item li {
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Changes Policy */
+.changes-policy {
+  margin-bottom: 2rem;
+}
+
+.update-process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.process-step {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.process-step:hover {
+  background: #fff;
+  border-color: #17a2b8;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(23, 162, 184, 0.2);
+}
+
+.process-step h4 {
+  color: #2c3e50;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.process-step p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Legal Framework */
+.legal-framework {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.governing-law,
+.dispute-resolution {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.governing-law {
+  border-left: 4px solid #6f42c1;
+}
+
+.dispute-resolution {
+  border-left: 4px solid #20c997;
+}
+
+.resolution-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.step-item {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.step-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.step-item h4 {
+  color: #2c3e50;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+.step-item p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Contact Section */
+.contact-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.contact-info p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.contact-method {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.contact-method:hover {
+  border-color: #3498db;
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.2);
+  transform: translateY(-5px);
+}
+
+.contact-method h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.contact-method p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.contact-method a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-method a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Navigation */
+.terms-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+.privacy-link,
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.privacy-link {
+  background: #9b59b6;
+}
+
+.privacy-link:hover {
+  background: #8e44ad;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);
+}
+
+.back-home:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Links */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Strong text */
+strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .terms-container {
+    padding: 1rem;
+  }
+
+  .terms-header {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .terms-header h1 {
+    font-size: 2rem;
+  }
+
+  .terms-subtitle {
+    font-size: 1rem;
+  }
+
+  .terms-content {
+    gap: 2rem;
+  }
+
+  .terms-section {
+    padding: 1.5rem;
+  }
+
+  .terms-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .account-rules,
+  .service-grid,
+  .prohibition-grid,
+  .content-rights,
+  .guideline-grid,
+  .ip-content,
+  .liability-grid,
+  .termination-policy,
+  .update-process,
+  .legal-framework,
+  .resolution-steps,
+  .contact-methods {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .terms-navigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .privacy-link,
+  .back-home {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .terms-container {
+    padding: 0.5rem;
+  }
+
+  .terms-header {
+    padding: 1rem;
+  }
+
+  .terms-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .terms-section {
+    padding: 1rem;
+  }
+
+  .rule-item,
+  .service-card,
+  .prohibition-item,
+  .user-rights,
+  .platform-rights,
+  .guideline-item,
+  .our-ip,
+  .game-ip,
+  .liability-item,
+  .user-termination,
+  .platform-termination,
+  .process-step,
+  .governing-law,
+  .dispute-resolution,
+  .contact-method {
+    padding: 1rem;
+  }
+
+  .service-icon {
+    font-size: 2rem;
+  }
+
+  .agreement-box,
+  .disclaimer-box {
+    padding: 1rem;
+  }
+} 
