@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { pageview } from '@/lib/gtag';
 import { setCustomTag } from '@/lib/clarity';
@@ -9,15 +9,23 @@ export default function AnalyticsProvider({ children }: { children: React.ReactN
   const pathname = usePathname();
   const [pageCount, setPageCount] = useState(0);
   const [sessionStart] = useState(Date.now());
+  const lastPathnameRef = useRef<string>('');
 
+  // 监听路径变化并更新页面计数
+  useEffect(() => {
+    // 只在路径真正改变时更新计数（避免重复计数）
+    if (pathname !== lastPathnameRef.current) {
+      lastPathnameRef.current = pathname;
+      setPageCount(prev => prev + 1);
+    }
+  }, [pathname]);
+
+  // 处理页面浏览追踪和 Clarity 标签设置
   useEffect(() => {
     // 只在生产环境中追踪页面浏览
     if (process.env.NODE_ENV === 'production') {
       pageview(pathname);
     }
-
-    // 更新页面计数
-    setPageCount(prev => prev + 1);
 
     // 设置 Clarity 页面信息
     if (typeof window !== 'undefined') {
@@ -31,7 +39,12 @@ export default function AnalyticsProvider({ children }: { children: React.ReactN
 
       setCustomTag('page_type', pageType);
       setCustomTag('current_path', pathname);
-      
+    }
+  }, [pathname]);
+
+  // 单独处理会话信息和用户行为标签（基于 pageCount 变化）
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
       // 设置会话信息
       const sessionDuration = Math.floor((Date.now() - sessionStart) / 1000);
       setCustomTag('session_duration', sessionDuration.toString());
@@ -44,7 +57,7 @@ export default function AnalyticsProvider({ children }: { children: React.ReactN
       
       setCustomTag('user_behavior_type', userBehaviorType);
     }
-  }, [pathname, pageCount, sessionStart]);
+  }, [pageCount, sessionStart]);
 
   return <>{children}</>;
 } 

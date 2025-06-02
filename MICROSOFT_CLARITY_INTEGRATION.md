@@ -184,6 +184,56 @@ clarityGameEvents.setCurrentGame('Pac-Man', 'arcade', 'pacman-1');
 - **用户留存**: 基于行为类型优化内容推荐
 - **错误修复**: 快速发现并解决技术问题
 
+## 🔧 问题修复记录
+
+### React useEffect 无限循环警告修复
+
+**问题描述**:
+在 `AnalyticsProvider.tsx` 中出现了 React 警告：`Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.`
+
+**原因分析**:
+原始代码中存在循环依赖问题：
+```typescript
+// 问题代码
+useEffect(() => {
+  setPageCount(prev => prev + 1);  // 更新 pageCount
+  // ... 使用 pageCount 设置标签
+}, [pathname, pageCount, sessionStart]); // 依赖 pageCount，但同时又更新它
+```
+
+**解决方案**:
+将 `useEffect` 拆分为三个独立的 effect，避免循环依赖：
+
+1. **路径变化监听** - 仅负责更新页面计数
+```typescript
+useEffect(() => {
+  if (pathname !== lastPathnameRef.current) {
+    lastPathnameRef.current = pathname;
+    setPageCount(prev => prev + 1);
+  }
+}, [pathname]);
+```
+
+2. **页面追踪** - 处理 Google Analytics 和基础 Clarity 标签
+```typescript
+useEffect(() => {
+  // 页面浏览追踪和页面类型标签
+}, [pathname]);
+```
+
+3. **会话信息更新** - 基于页面计数更新会话相关标签
+```typescript
+useEffect(() => {
+  // 会话时长、页面数量、用户行为类型标签
+}, [pageCount, sessionStart]);
+```
+
+**修复结果**:
+- ✅ 消除了 React 无限循环警告
+- ✅ 保持了所有分析功能的完整性
+- ✅ 提高了组件性能和稳定性
+- ✅ 避免了重复的页面计数
+
 ## ✅ 集成状态
 
 - ✅ Microsoft Clarity 集成完成
@@ -196,6 +246,7 @@ clarityGameEvents.setCurrentGame('Pac-Man', 'arcade', 'pacman-1');
 - ✅ TypeScript 类型安全
 - ✅ 环境区分处理
 - ✅ 与 Google Analytics 协同工作
+- ✅ React useEffect 循环依赖问题修复
 
 ## 🎯 下一步优化建议
 
@@ -214,4 +265,4 @@ clarityGameEvents.setCurrentGame('Pac-Man', 'arcade', 'pacman-1');
 - 配置定期分析报告
 - 建立数据驱动的优化流程
 
-Microsoft Clarity 现已完全集成到 GlobalPlay 平台，与 Google Analytics 一起为用户体验优化和数据驱动决策提供了强大的双重分析支持！ 
+Microsoft Clarity 现已完全集成到 GlobalPlay 平台，与 Google Analytics 一起为用户体验优化和数据驱动决策提供了强大的双重分析支持！所有已知的技术问题都已解决，系统运行稳定可靠。 

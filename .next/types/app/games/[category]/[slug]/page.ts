@@ -1,8 +1,8 @@
-// File: /Users/mogu/project/globalplay/src/app/sitemap/page.tsx
-import * as entry from '../../../../src/app/sitemap/page.js'
+// File: /Users/mogu/project/globalplay/src/app/games/[category]/[slug]/page.tsx
+import * as entry from '../../../../../../src/app/games/[category]/[slug]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../src/app/sitemap/page.js')
+type TEntry = typeof import('../../../../../../src/app/games/[category]/[slug]/page.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{
