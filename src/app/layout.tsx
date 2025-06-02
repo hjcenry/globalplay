@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
+import MicrosoftClarity from '@/components/MicrosoftClarity';
+import AnalyticsProvider from '@/components/AnalyticsProvider';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -51,9 +54,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <AnalyticsProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </AnalyticsProvider>
+        <GoogleAnalytics />
+        <MicrosoftClarity />
       </body>
     </html>
   );
