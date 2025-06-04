@@ -35,8 +35,9 @@ export default function Header() {
         <nav>
           <ul className="nav-menu">
             <li><Link href="/">Home</Link></li>
+            <li><Link href="/all-games">All Games</Link></li>
             <li><Link href="/#categories">Categories</Link></li>
-            <li><Link href="/#trending">Trending</Link></li>
+            <li><Link href="/trending">Trending</Link></li>
             <li><Link href="/new-games">New Games</Link></li>
             <li><Link href="/guides">Guides</Link></li>
           </ul>

@@ -1,5 +1,9 @@
 {
-  "/not-found": "app/not-found.js",
   "/page": "app/page.js",
+  "/all-games/page": "app/all-games/page.js",
+  "/categories/[id]/page": "app/categories/[id]/page.js",
+  "/trending/page": "app/trending/page.js",
+  "/new-games/page": "app/new-games/page.js",
+  "/guides/page": "app/guides/page.js",
   "/games/[category]/[slug]/page": "app/games/[category]/[slug]/page.js"
 }

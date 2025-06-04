@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import GameCard from '@/components/GameCard';
+import StatsSection from '@/components/StatsSection';
+import FeaturesSection from '@/components/FeaturesSection';
+import EnhancedHero from '@/components/EnhancedHero';
 import { getFeaturedGames, getTrendingGames, categories } from '@/data/games';
 
 export default function HomePage() {
@@ -11,23 +14,15 @@ export default function HomePage() {
       {/* Breadcrumb */}
       <div className="breadcrumb">
         <div className="breadcrumb-nav">
-          <span>Home</span> &gt; <span>Online Games</span>
+          <span>Home</span> <span>›</span> <span>Online Games</span>
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1>🎯 The Best Free Online Games Platform</h1>
-          <p>
-            Over 10,000 handpicked games, no download required!
-            Play action, strategy, puzzle, racing and more games instantly
-          </p>
-          <Link href="#featured" className="cta-button">
-            🚀 Start Playing
-          </Link>
-        </div>
-      </section>
+      {/* Enhanced Hero Section */}
+      <EnhancedHero />
+
+      {/* Statistics Section */}
+      <StatsSection />
 
       {/* Featured Games */}
       <section className="featured-section" id="featured">
@@ -61,14 +56,22 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Features Section */}
+      <FeaturesSection />
+
       {/* Trending Games */}
       <section className="trending-section">
         <div className="container">
-          <h2 className="section-title" id="trending">📈 Trending Today</h2>
+          <h2 className="section-title" id="trending">📈 Popular Games</h2>
           <div className="trending-grid">
-            {trendingGames.map((game) => (
+            {trendingGames.slice(0, 8).map((game) => (
               <GameCard key={game.id} game={game} showPlayIcon={false} showImage={true} />
             ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <Link href="/all-games" className="cta-button">
+              View All Games →
+            </Link>
           </div>
         </div>
       </section>
