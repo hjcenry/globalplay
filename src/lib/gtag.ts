@@ -1,4 +1,4 @@
-export const GA_TRACKING_ID = 'G-KPY9CG8WPE';
+export const GA_TRACKING_ID = 'G-6TCWKWHL6Q';
 
 // 类型定义
 declare global {
@@ -90,4 +90,4 @@ export const trackGameEvents = {
       label: categoryName,
     });
   },
-}; 
+};

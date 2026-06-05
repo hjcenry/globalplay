@@ -2,7 +2,7 @@
 
 import Script from 'next/script';
 
-const GA_TRACKING_ID = 'G-KPY9CG8WPE';
+const GA_TRACKING_ID = 'G-6TCWKWHL6Q';
 
 export default function GoogleAnalytics() {
   // 只在生产环境中加载 Google Analytics
@@ -34,4 +34,4 @@ export default function GoogleAnalytics() {
       />
     </>
   );
-} 
+}

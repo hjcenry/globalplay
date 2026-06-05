@@ -7,7 +7,7 @@
 ## ✅ 已实现的功能
 
 ### 1. 基础设置
-- **Google Analytics ID**: `G-KPY9CG8WPE`
+- **Google Analytics ID**: `G-6TCWKWHL6Q`
 - **GA4 追踪代码**: 已正确集成到 Next.js 应用中
 - **开发环境优化**: 仅在生产环境加载 GA，开发环境不加载以提高性能
 
@@ -178,4 +178,4 @@ trackGameEvents.gameStart('游戏名称', '游戏分类');
 - ✅ TypeScript 类型安全
 - ✅ 环境区分处理
 
-Google Analytics 现已完全集成到 GlobalPlay 平台，为数据驱动的决策和用户体验优化提供了强大的基础支持！ 
+Google Analytics 现已完全集成到 GlobalPlay 平台，为数据驱动的决策和用户体验优化提供了强大的基础支持！
