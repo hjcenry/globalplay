@@ -1,10 +1,15 @@
 import GameCard from '@/components/GameCard';
 import { categories, getNewGames } from '@/data/games';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'New Games - GlobalPlay Games',
   description:
     'Discover recently added browser games in the GlobalPlay catalog, with descriptions, controls, and category links.',
+  alternates: {
+    canonical: canonical('/new-games'),
+  },
 };
 
 export default function NewGamesPage() {

@@ -1,10 +1,15 @@
 import GameCard from '@/components/GameCard';
 import { categories, games } from '@/data/games';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'All Games - GlobalPlay Games',
   description:
     'Browse all games available on GlobalPlay, organized across action, puzzle, strategy, racing, shooting, and adventure categories.',
+  alternates: {
+    canonical: canonical('/all-games'),
+  },
 };
 
 export default function AllGamesPage() {

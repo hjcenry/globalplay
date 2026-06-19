@@ -1,7 +1,9 @@
 import { categories, games } from '@/data/games';
+import { isIndexableGame } from '@/lib/gamePolicy';
+import { SITE_URL } from '@/lib/seo';
 
 export async function GET() {
-  const baseUrl = 'https://globalplay.games'; // 替换为实际域名
+  const baseUrl = SITE_URL;
   
   // 静态页面
   const staticPages = [
@@ -23,7 +25,9 @@ export async function GET() {
   const categoryPages = categories.map(category => `/categories/${category.id}`);
 
   // 游戏页面
-  const gamePages = games.map(game => `/games/${game.category}/${game.slug}`);
+  const gamePages = games
+    .filter(isIndexableGame)
+    .map(game => `/games/${game.category}/${game.slug}`);
 
   // 合并所有页面
   const allPages = [...staticPages, ...categoryPages, ...gamePages];

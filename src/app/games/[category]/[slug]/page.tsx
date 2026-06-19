@@ -4,6 +4,8 @@ import { getGameBySlug, games, categories } from '@/data/games';
 import type { Metadata } from 'next';
 import GameClient from './GameClient';
 import GameCard from '@/components/GameCard';
+import { canonical } from '@/lib/seo';
+import { isIndexableGame } from '@/lib/gamePolicy';
 
 interface GamePageProps {
   params: {
@@ -29,6 +31,7 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
   }
 
   const categoryName = categories.find(cat => cat.id === game.category)?.name || 'Games';
+  const isIndexable = isIndexableGame(game);
 
   return {
     title: `${game.title} - Free Online ${categoryName} | GlobalPlay.games`,
@@ -41,6 +44,13 @@ export async function generateMetadata({ params }: GamePageProps): Promise<Metad
       game.category,
       ...game.tags,
     ].join(', '),
+    robots: {
+      index: isIndexable,
+      follow: true,
+    },
+    alternates: {
+      canonical: canonical(`/games/${game.category}/${game.slug}`),
+    },
     openGraph: {
       title: `${game.title} - Free Online Game`,
       description: game.shortDescription,
@@ -73,11 +83,7 @@ export default function GamePage({ params }: GamePageProps) {
   const category = categories.find(cat => cat.id === game.category);
   const categoryName = category?.name || 'Games';
   const relatedGames = games.filter(g => g.category === game.category && g.slug !== game.slug).slice(0, 4);
-  const sourceLabel = game.tags.includes('crazygames')
-    ? 'CrazyGames'
-    : game.tags.includes('y8')
-      ? 'Y8 or GameDistribution'
-      : 'a third-party game provider';
+  const sourceLabel = game.sourceName;
 
   const formatPlayCount = (count: number): string => {
     if (count >= 1000000) {
@@ -131,6 +137,12 @@ export default function GamePage({ params }: GamePageProps) {
             <div className="game-description-block">
               <h2>🎯 About {game.title}</h2>
               <p>{game.description}</p>
+              {game.editorialSummary && (
+                <>
+                  <h3>Editorial Notes</h3>
+                  <p>{game.editorialSummary}</p>
+                </>
+              )}
               <p>
                 This listing is organized under {categoryName}. The listed control style is {game.controls}, and the
                 game is launched in a browser iframe when the third-party provider is available.
@@ -138,6 +150,9 @@ export default function GamePage({ params }: GamePageProps) {
               <p>
                 GlobalPlay.games is an independent directory and is not the developer, publisher, or official brand
                 site for {game.title}. Game names, logos, screenshots, and trademarks belong to their respective owners.
+              </p>
+              <p>
+                Source and rights: {game.sourceName}. {game.licenseNote}
               </p>
             </div>
             
@@ -178,6 +193,41 @@ export default function GamePage({ params }: GamePageProps) {
           </div>
         </div>
       </section>
+
+      {(game.testedControls || game.deviceNotes || game.playTips?.length) && (
+        <section className="how-to-play">
+          <div className="container">
+            <h2 className="section-title">Editorial Review Details</h2>
+            <div className="features-grid">
+              {game.testedControls && (
+                <div className="feature-card">
+                  <div className="feature-icon">✓</div>
+                  <h3 className="feature-title">Controls Tested</h3>
+                  <p className="feature-description">{game.testedControls}</p>
+                </div>
+              )}
+              {game.deviceNotes && (
+                <div className="feature-card">
+                  <div className="feature-icon">D</div>
+                  <h3 className="feature-title">Device Compatibility</h3>
+                  <p className="feature-description">{game.deviceNotes}</p>
+                </div>
+              )}
+              {game.playTips?.length ? (
+                <div className="feature-card">
+                  <div className="feature-icon">i</div>
+                  <h3 className="feature-title">Tips Before Playing</h3>
+                  <ul className="feature-description">
+                    {game.playTips.map((tip) => (
+                      <li key={tip}>{tip}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* How to Play Section */}
       <section className="how-to-play">

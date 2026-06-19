@@ -3,6 +3,7 @@ import Link from 'next/link';
 import GameCard from '@/components/GameCard';
 import { getGamesByCategory, categories } from '@/data/games';
 import type { Metadata } from 'next';
+import { canonical } from '@/lib/seo';
 
 interface CategoryPageProps {
   params: {
@@ -62,6 +63,9 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     title: `${category.name} - Free Online Games | GlobalPlay.games`,
     description: `Play the best free ${category.name.toLowerCase()} online. Over ${category.count} games available to play instantly in your browser!`,
     keywords: `${category.name.toLowerCase()}, free online games, browser games, ${category.id} games`,
+    alternates: {
+      canonical: canonical(`/categories/${category.id}`),
+    },
     openGraph: {
       title: `${category.name} - Free Online Games`,
       description: `Play the best free ${category.name.toLowerCase()} online. Over ${category.count} games available!`,

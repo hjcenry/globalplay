@@ -6,6 +6,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import MicrosoftClarity from '@/components/MicrosoftClarity';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import CookieConsent from '@/components/CookieConsent';
+import { canonical } from '@/lib/seo';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
   keywords: 'free browser games, online games, HTML5 games, action games, puzzle games, strategy games',
   authors: [{ name: 'GlobalPlay Games' }],
   robots: 'index, follow',
+  alternates: {
+    canonical: canonical('/'),
+  },
   openGraph: {
     title: 'GlobalPlay Games - Free Browser Game Directory',
     description: 'Browse free browser games by category. No required download.',

@@ -1,10 +1,15 @@
 import GameCard from '@/components/GameCard';
 import { getTrendingGames } from '@/data/games';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Trending Games - GlobalPlay Games',
   description:
     'Discover popular browser games on GlobalPlay, ranked by catalog rating and play-count signals from the current game data.',
+  alternates: {
+    canonical: canonical('/trending'),
+  },
 };
 
 export default function TrendingPage() {

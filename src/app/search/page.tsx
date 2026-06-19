@@ -15,7 +15,10 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   return {
     title: query ? `Search Results for "${query}" - GlobalPlay Games` : 'Search Games - GlobalPlay Games',
     description: query ? `Find games matching "${query}". Browse our collection of free online games.` : 'Search our collection of free online games.',
-    robots: 'noindex, follow',
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 
@@ -74,4 +77,4 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
       </section>
     </>
   );
-} 
+}

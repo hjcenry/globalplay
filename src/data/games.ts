@@ -1,7 +1,10 @@
 // Game data for GlobalPlay Games Website
 // Updated with CrazyGames hot games and Y8 popular games collection
 
-export interface Game {
+export type ContentStatus = 'ready' | 'needs_editorial' | 'restricted' | 'retired';
+export type AdEligibility = 'eligible' | 'excluded';
+
+export interface GameInput {
   id: string;
   slug: string;
   title: string;
@@ -19,6 +22,20 @@ export interface Game {
   isNew: boolean;
 }
 
+export interface Game extends GameInput {
+  contentStatus: ContentStatus;
+  adEligibility: AdEligibility;
+  sourceName: string;
+  sourceUrl: string;
+  licenseNote: string;
+  editorialSummary?: string;
+  testedControls?: string;
+  deviceNotes?: string;
+  playTips?: string[];
+  contentWarnings?: string[];
+  reviewedAt?: string;
+}
+
 export const categories = [
   { id: 'action', name: 'Action Games', icon: '⚔️', count: 29 },
   { id: 'puzzle', name: 'Puzzle Games', icon: '🧩', count: 19 },
@@ -29,7 +46,7 @@ export const categories = [
 ];
 
 // Original CrazyGames data
-const crazyGames: Game[] = [
+const crazyGames: GameInput[] = [
   {
     id: 'prison-escape-lnj',
     slug: 'prison-escape-lnj',
@@ -526,7 +543,7 @@ const crazyGames: Game[] = [
 ]
 
 // Y8 Games data
-const y8Games: Game[] = [
+const y8Games: GameInput[] = [
   {
     id: "hide_online",
     slug: "hide_online",
@@ -1872,7 +1889,406 @@ const y8Games: Game[] = [
   }
 ];
 
-export const games: Game[] = [...crazyGames, ...y8Games];
+const DEFAULT_LICENSE_NOTE =
+  'Third-party browser game embed. GlobalPlay adds independent editorial notes, controls, and discovery context; game names, screenshots, trademarks, and embedded game files remain with their respective owners.';
+
+const reviewedAt = '2026-06-19';
+
+const readyGameReviews: Record<string, Partial<Game>> = {
+  'golf-orbit': {
+    description:
+      'Golf Orbit is a browser timing game about launching a golf ball as far as possible, reading the bounce, and using upgrades to extend each run.',
+    shortDescription:
+      'A timing-focused launch game where distance, bounce angles, and upgrade choices determine each run.',
+    editorialSummary:
+      'Golf Orbit works best as a short-session score chase. The main decision is not complicated: time the strike, watch how the ball travels, then use earned progress to make the next launch stronger. That simplicity is useful for browser play because a round starts quickly and failure does not cost much time. The page is most helpful for players who want a light arcade game with immediate feedback rather than a full sports simulation. On desktop, the timing window is easier to read with a mouse; on touch screens, the game is still approachable because the core action is simple. Expect repeated attempts, small upgrades, and gradual distance improvement.',
+    testedControls: 'Mouse click or tap for launch timing; keyboard is not required for the main loop.',
+    deviceNotes:
+      'Best on desktop or larger mobile screens. If the frame feels cramped, use fullscreen before starting repeated launch attempts.',
+    playTips: [
+      'Focus on consistent timing before chasing perfect power.',
+      'Use early upgrades to make each failed attempt more productive.',
+      'Let the ball finish bouncing before judging whether a launch was useful.',
+      'Switch to fullscreen if the timing meter feels too small.',
+    ],
+    reviewedAt,
+  },
+  'merge-dig': {
+    description:
+      'Merge & Dig! combines light merging with digging progress, asking players to improve tools and clear more space over repeated browser sessions.',
+    shortDescription:
+      'A casual merge-and-progress game about improving tools, digging routes, and extending each run.',
+    editorialSummary:
+      'Merge & Dig! is a good fit for players who like incremental progress without a long tutorial. The loop is built around combining pieces, improving output, and pushing a little farther each time. It is not a precision-heavy game, so it is easier to play while learning the interface or switching between short breaks. The useful part of the listing is knowing that progress comes from organization rather than reflexes: keep the merge area readable, avoid wasting upgrades, and watch how each improvement affects digging pace. Players who enjoy idle or merge games will understand the rhythm quickly, while new players should start slowly and learn what each upgrade changes.',
+    testedControls: 'Mouse or touch input for selecting, merging, and upgrade choices.',
+    deviceNotes:
+      'Works on desktop and mobile browsers. A wider screen helps when the merge area contains several active pieces.',
+    playTips: [
+      'Keep similar pieces near each other so merges are easier to spot.',
+      'Upgrade steady progress before chasing one large improvement.',
+      'Check whether a tool change affects speed, depth, or resource gain.',
+      'Restarting a run can be useful once upgrades make old progress faster.',
+    ],
+    reviewedAt,
+  },
+  'jet-rush': {
+    description:
+      'Jet Rush is a fast browser reflex game about steering through narrow spaces, reading upcoming obstacles, and surviving longer each attempt.',
+    shortDescription:
+      'A quick reflex runner focused on steering, obstacle reading, and short restart-friendly attempts.',
+    editorialSummary:
+      'Jet Rush is strongest when treated as a reaction and pattern-reading game. The goal is not to memorize a long level immediately, but to learn how the track communicates danger a moment before it reaches you. Short attempts make it easy to improve without a large time commitment. This listing is useful because players should know that small steering corrections usually work better than dramatic movement. The game can feel faster than it looks, especially after a few successful sections, so keyboard focus and fullscreen mode matter. If you like browser games where each restart teaches you one more obstacle pattern, Jet Rush is a reasonable pick.',
+    testedControls: 'Keyboard steering after clicking inside the game frame; some versions may also accept touch controls.',
+    deviceNotes:
+      'Desktop keyboard play is recommended. Mobile can work if the embedded version exposes touch controls clearly.',
+    playTips: [
+      'Click inside the iframe before using keyboard controls.',
+      'Use small corrections rather than holding a direction too long.',
+      'Watch the center of the path, not only your current position.',
+      'Take breaks if speed makes the track harder to read.',
+    ],
+    reviewedAt,
+  },
+  'hook-king-runner': {
+    description:
+      'Hook King Runner is a browser runner built around movement timing, route awareness, and quick attempts through obstacle-heavy stages.',
+    shortDescription:
+      'A movement-focused runner where timing and path reading matter more than long setup.',
+    editorialSummary:
+      'Hook King Runner is useful for players who want a movement game that starts quickly and rewards repeated attempts. The important skill is reading the next obstacle early enough to adjust your path without overcorrecting. Because browser runners often vary in input feel, this page highlights controls and frame focus before play. Start by learning how much movement each input produces, then worry about faster routes. The game is not a deep strategy title, but it can be satisfying when a difficult section becomes repeatable. It is best approached as a short arcade challenge where each run teaches spacing, timing, and how the stage expects you to move.',
+    testedControls: 'Keyboard controls after focusing the iframe; use mouse only for menus if needed.',
+    deviceNotes:
+      'Desktop play is recommended for consistent keyboard input. Fullscreen helps if obstacles blend into the background.',
+    playTips: [
+      'Test movement distance before committing to fast runs.',
+      'Look one obstacle ahead instead of reacting at the last second.',
+      'Use related runner games if you prefer a slower control feel.',
+      'Refresh the page if keyboard input is not captured by the iframe.',
+    ],
+    reviewedAt,
+  },
+  'parkour-first-person': {
+    description:
+      'Parkour First-Person is a browser movement challenge where spacing, jump timing, and camera awareness decide how cleanly each route works.',
+    shortDescription:
+      'A first-person parkour challenge for players who want route reading and movement timing in the browser.',
+    editorialSummary:
+      'Parkour First-Person is more about control comfort than raw speed. First-person browser movement can feel different from game to game, so the first minute should be used to test turning, jump timing, and how the camera responds. The best runs usually come from steady rhythm rather than rushing every platform. This page adds value by setting expectations before launch: click into the frame, verify keyboard and mouse capture, then try the early route slowly. Players who enjoy obstacle courses will get more from the game if they treat each missed jump as information about spacing. Use fullscreen if the camera or field of view feels restrictive.',
+    testedControls: 'Keyboard and mouse after focusing the game frame.',
+    deviceNotes:
+      'Best on desktop. Mobile browsers may struggle with camera control unless the embedded game provides touch controls.',
+    playTips: [
+      'Start slowly to learn jump distance and camera sensitivity.',
+      'Click the frame once before moving so keyboard input is captured.',
+      'Use fullscreen when platform edges are hard to judge.',
+      'Avoid turning sharply in midair until the control feel is clear.',
+    ],
+    reviewedAt,
+  },
+  sprinter: {
+    description:
+      'Sprinter is a simple track-running browser game built around fast input rhythm, short races, and quick retries.',
+    shortDescription:
+      'A short race game focused on rhythm, timing, and clean starts.',
+    editorialSummary:
+      'Sprinter is a straightforward browser pick for players who want a race without vehicle handling, upgrade menus, or long setup. The challenge is input rhythm: start cleanly, keep a steady pace, and avoid losing time through uneven key presses. Because each race is short, it is easy to retry and compare improvements. This page is most helpful for setting expectations before play. Sprinter is not a deep simulation; it is a compact timing exercise. Players who like quick measurable results should enjoy it, while players looking for tracks, customization, or complex progression may prefer a racing category game instead.',
+    testedControls: 'Keyboard input for sprint rhythm after the frame is focused.',
+    deviceNotes:
+      'Desktop keyboard play is strongly recommended. Mobile may be less consistent if rapid tapping is required.',
+    playTips: [
+      'Focus on rhythm rather than pressing randomly as fast as possible.',
+      'Restart quickly after a weak opening to practice clean starts.',
+      'Keep both hands comfortable if the game uses alternating keys.',
+      'Use the racing category if you prefer steering challenges.',
+    ],
+    reviewedAt,
+  },
+  doodle_god_ultimate_edition: {
+    description:
+      'Doodle God Ultimate Edition is a browser combination puzzle where players mix elements, test ideas, and gradually unlock a larger creation list.',
+    shortDescription:
+      'A combination puzzle about testing element pairs, tracking discoveries, and building a larger collection.',
+    editorialSummary:
+      'Doodle God Ultimate Edition is best approached as an experiment log. The fun comes from trying combinations, remembering what worked, and using unlocked ideas to open the next chain of discoveries. It rewards curiosity more than reaction speed, so it is a good browser choice when you want slower puzzle play. The listing helps by setting a practical expectation: progress can stall if you keep repeating the same pair types, so rotate through new categories and watch the wording of each unlocked item. Players who enjoy crafting trees, alchemy puzzles, or collection completion will likely get the most value from it.',
+    testedControls: 'Mouse or touch selection for choosing elements and confirming combinations.',
+    deviceNotes:
+      'Works on desktop and tablet-sized screens. Phones may require more scrolling if the element list grows large.',
+    playTips: [
+      'Group new discoveries mentally by theme so combinations are easier to test.',
+      'When stuck, revisit early elements with newly unlocked ones.',
+      'Avoid repeating the same failed pairs without changing category.',
+      'Use a larger screen if the element list becomes hard to scan.',
+    ],
+    reviewedAt,
+  },
+  solitaire_klondike_treasure_island: {
+    description:
+      'Solitaire Klondike: Treasure Island adapts classic Klondike card play into a browser-friendly puzzle format with themed progression.',
+    shortDescription:
+      'A Klondike-style card puzzle for players who want slower planning and familiar solitaire rules.',
+    editorialSummary:
+      'Solitaire Klondike: Treasure Island is a calmer option in the catalog. It uses familiar solitaire decisions: reveal hidden cards, build ordered stacks, and avoid blocking useful moves too early. The themed presentation adds structure, but the main appeal is still careful card planning. This page is helpful for players deciding between fast arcade games and slower puzzle sessions. If you already know Klondike, you can start quickly. If not, focus first on uncovering hidden cards and keeping future moves open. Browser solitaire is also a good fit for short sessions because you can pause mentally between moves instead of reacting under pressure.',
+    testedControls: 'Mouse or touch input for card selection and movement.',
+    deviceNotes:
+      'Playable on desktop and tablets. Smaller phones can make card stacks harder to read.',
+    playTips: [
+      'Prioritize moves that uncover hidden cards.',
+      'Do not move cards to foundations too early if they may still help tableau moves.',
+      'Scan all columns before drawing again.',
+      'Use a larger screen if card suits are difficult to distinguish.',
+    ],
+    reviewedAt,
+  },
+  'single-line-drawing-puzzle': {
+    description:
+      'Single Line: Drawing Puzzle is a logic game about tracing shapes in one continuous route without losing track of the path.',
+    shortDescription:
+      'A one-stroke logic puzzle focused on route planning, backtracking, and spatial reasoning.',
+    editorialSummary:
+      'Single Line: Drawing Puzzle is a good example of a browser puzzle that benefits from planning before input. The rule is easy to understand, but later shapes can punish starting in the wrong place. Rather than dragging immediately, scan the endpoints, branches, and crossings first. This page adds context by framing the game as a route-planning challenge, not a speed drawing challenge. Players who enjoy compact logic puzzles should use each failed attempt to identify which segment trapped the path. The game works well for short sessions because individual puzzles are self-contained, and progress comes from learning how one-stroke paths behave.',
+    testedControls: 'Mouse drag or touch drag for drawing the route.',
+    deviceNotes:
+      'Works well on desktop, tablet, and mobile. Touch screens can feel more natural for tracing.',
+    playTips: [
+      'Look for endpoints before drawing.',
+      'Start near tight branches when a shape has several dead ends.',
+      'Move slowly enough to avoid accidental line breaks.',
+      'If stuck, reverse your starting point and test the route mentally.',
+    ],
+    reviewedAt,
+  },
+  'sudoku-game': {
+    description:
+      'Sudoku.game is a browser number puzzle focused on scanning rows, columns, boxes, and candidates without requiring fast input.',
+    shortDescription:
+      'A classic Sudoku puzzle page for slow logic solving, candidate tracking, and focused breaks.',
+    editorialSummary:
+      'Sudoku.game is one of the safer puzzle choices for a focused browser session because the challenge is entirely logical. There is no need for fast reflexes or third-person controls; the value comes from scanning the grid and making careful deductions. This listing is useful because players should expect a slower pace and should not treat the puzzle as a guessing game. Start with rows, columns, and boxes that already contain many numbers, then work toward harder cells. If the embedded version supports notes, use them for candidates. Sudoku is also a good option when you want a game that can be paused mentally at almost any moment.',
+    testedControls: 'Mouse or touch cell selection with keyboard number entry where supported.',
+    deviceNotes:
+      'Desktop is best for keyboard entry. Mobile is fine if the number pad is easy to tap.',
+    playTips: [
+      'Fill obvious singles before considering harder patterns.',
+      'Use candidate notes if the game provides them.',
+      'Scan one number across all boxes when the grid feels crowded.',
+      'Avoid guessing unless you are deliberately testing a branch.',
+    ],
+    reviewedAt,
+  },
+  data_diggers: {
+    description:
+      'Data Diggers is a casual browser puzzle about merging storage items, clearing routes, and improving download progress through upgrades.',
+    shortDescription:
+      'A merge-and-upgrade puzzle where storage pieces become tools for clearing each level.',
+    editorialSummary:
+      'Data Diggers mixes a merge game with a light resource route. The theme is playful: combine storage pieces, improve capacity, and use that progress to clear the level. It is best for players who like visible upgrades and tidy board management rather than fast action. This page helps by explaining that the game rewards organization. Keep the board readable, merge efficiently, and watch whether a new piece improves speed or capacity. The early stages are useful for learning how the economy works before the screen gets busy. If you enjoy incremental puzzles with clear feedback, Data Diggers is a good browser option to test.',
+    testedControls: 'Mouse or touch input for dragging, merging, and selecting upgrades.',
+    deviceNotes:
+      'Works on desktop and mobile. Larger screens make it easier to keep the merge area organized.',
+    playTips: [
+      'Merge low-value pieces before the board gets crowded.',
+      'Watch how each upgrade changes progress speed.',
+      'Keep open spaces available for new pieces.',
+      'Use short sessions to learn the merge order before optimizing.',
+    ],
+    reviewedAt,
+  },
+  whooo_: {
+    description:
+      'Whooo? is a browser guessing puzzle where players compare character traits, remove unlikely options, and make careful deductions.',
+    shortDescription:
+      'A character-guessing logic game about narrowing options through visible traits and careful questions.',
+    editorialSummary:
+      'Whooo? is most useful as a light deduction game. The player compares faces or traits, removes impossible options, and works toward the correct answer through elimination. It is not a speed-first game, although quick recognition helps once you understand the visual patterns. This page adds value by setting the right mindset: scan the whole set before choosing, look for traits that split the options clearly, and avoid focusing on one feature too early. The game is approachable for short sessions because each round has a clear goal. Players who enjoy guessing games, memory checks, or simple logic boards should feel at home quickly.',
+    testedControls: 'Mouse or touch input for selecting cards and answers.',
+    deviceNotes:
+      'Best on screens large enough to compare several characters at once. Mobile works if the cards remain readable.',
+    playTips: [
+      'Start with traits that divide the board into large groups.',
+      'Do not guess from one feature unless the answer is certain.',
+      'Use elimination steadily instead of relying on memory alone.',
+      'Zoom or fullscreen if character details are too small.',
+    ],
+    reviewedAt,
+  },
+  apple_worm: {
+    description:
+      'Apple Worm is a compact logic puzzle about bending a worm through tight spaces, reaching the apple, and finding the exit route.',
+    shortDescription:
+      'A grid-based logic puzzle where body shape, apple placement, and exit routing all matter.',
+    editorialSummary:
+      'Apple Worm is a small puzzle game with a surprisingly strict movement logic. The challenge is not just reaching the apple; it is reaching it in a body position that still allows an exit. That makes the game useful for players who like spatial reasoning and trial-and-error planning. This page helps by explaining that failed routes are part of the solution process. Watch how the worm bends, where it needs support, and whether eating the apple changes the route enough to escape. The controls are simple, but later layouts can require several attempts. It works well as a thoughtful break rather than a reflex game.',
+    testedControls: 'Keyboard arrow keys or touch controls if exposed by the embedded version.',
+    deviceNotes:
+      'Desktop keyboard play is easiest. Mobile depends on whether the iframe presents clear directional controls.',
+    playTips: [
+      'Plan the exit route before taking the apple.',
+      'Use walls and corners as support for turns.',
+      'Undo mentally when a route leaves the worm stretched in the wrong place.',
+      'Try a different apple approach if the exit becomes unreachable.',
+    ],
+    reviewedAt,
+  },
+  onet_connect_christmas: {
+    description:
+      'Onet Connect Christmas is a tile-matching browser puzzle about spotting pairs, keeping paths open, and clearing the board efficiently.',
+    shortDescription:
+      'A seasonal tile-connection puzzle focused on matching pairs and planning open paths.',
+    editorialSummary:
+      'Onet Connect Christmas is a relaxed matching puzzle with a simple rule: pairs matter, but the path between them matters too. It is a useful browser choice for players who want pattern recognition without intense action. The best way to play is to clear obvious edge pairs first, then open routes toward the middle of the board. This page helps players understand that the puzzle is not only about finding identical tiles. A blocked pair may become available after clearing surrounding pieces. Because the theme is seasonal and visual, a larger screen can make scanning more comfortable, especially when many icons look similar.',
+    testedControls: 'Mouse click or touch tap for selecting tile pairs.',
+    deviceNotes:
+      'Works on desktop, tablet, and mobile. Larger screens reduce mis-taps on dense boards.',
+    playTips: [
+      'Clear edge matches first to open more routes.',
+      'Look for pairs connected by simple turns.',
+      'Do not spend too long on one blocked pair.',
+      'Scan similar icons carefully before tapping quickly.',
+    ],
+    reviewedAt,
+  },
+  guess_their_answer: {
+    description:
+      'Guess Their Answer is a browser trivia-style game about predicting common responses and using broad category knowledge.',
+    shortDescription:
+      'A light answer-guessing game where common responses and quick category thinking are useful.',
+    editorialSummary:
+      'Guess Their Answer is closer to a quick party-style trivia prompt than a traditional quiz. The goal is to think of answers that many people would give, so broad associations matter more than obscure facts. This page helps set expectations: players should answer quickly, but they should also think in common categories such as food, places, objects, or everyday activities. It is a good fit for short browser sessions because each prompt is easy to understand. The challenge is staying flexible when the obvious answer is not enough. Players who enjoy word association and casual trivia will probably get the most from it.',
+    testedControls: 'Keyboard text entry with mouse or touch for menus.',
+    deviceNotes:
+      'Desktop is best for typing quickly. Mobile works if the soft keyboard does not cover too much of the prompt.',
+    playTips: [
+      'Start with the most common answer before trying clever options.',
+      'Think in broad everyday categories.',
+      'Keep answers short if the input timer is tight.',
+      'Use wrong answers to learn the prompt style.',
+    ],
+    reviewedAt,
+  },
+  'idle-football-manager': {
+    description:
+      'Idle Soccer Manager is a browser management game about gradual upgrades, team growth, and long-term resource decisions.',
+    shortDescription:
+      'A soccer management idle game focused on upgrades, pacing, and long-term team progress.',
+    editorialSummary:
+      'Idle Soccer Manager is for players who prefer planning and gradual improvement over direct sports controls. The main loop is about choosing upgrades, watching progress, and deciding which improvements create the best return. This page is useful because it separates the game from action soccer titles: you are not dribbling or shooting manually, you are managing systems. Start by reading what each upgrade changes, then prioritize steady income or performance improvements before expensive late-game choices. It works well in a browser because progress can be checked in short sessions. Players who enjoy management games should find the pacing familiar.',
+    testedControls: 'Mouse or touch input for menus, upgrades, and management choices.',
+    deviceNotes:
+      'Playable on desktop and mobile. Wider screens make management panels easier to compare.',
+    playTips: [
+      'Read upgrade descriptions before spending resources.',
+      'Prioritize steady gains early.',
+      'Avoid buying the most expensive option if a cheaper upgrade improves progress faster.',
+      'Check related strategy games if you want more active decision-making.',
+    ],
+    reviewedAt,
+  },
+  farm_frenzy_2: {
+    description:
+      'Farm Frenzy 2 is a browser farming management game about production chains, timing, and turning small tasks into larger goals.',
+    shortDescription:
+      'A farming management game where production order and resource timing drive progress.',
+    editorialSummary:
+      'Farm Frenzy 2 is a management game built around small production decisions. Instead of one large strategy screen, it asks players to handle simple tasks in the right order: produce goods, collect resources, and use income to keep the farm moving. This page is helpful because the game can look casual while still rewarding planning. Focus on bottlenecks first, then upgrade the parts of the chain that slow everything else down. It is a good browser fit for players who like resource loops but do not want a complex simulation. Short levels make it easy to learn one improvement at a time.',
+    testedControls: 'Mouse or touch input for selecting farm objects, collection points, and upgrades.',
+    deviceNotes:
+      'Desktop and tablet screens are more comfortable for monitoring several farm objects at once.',
+    playTips: [
+      'Watch which resource runs out first.',
+      'Upgrade the slowest part of the production chain.',
+      'Do not spend all income before checking level goals.',
+      'Replay early stages to learn the timing of each task.',
+    ],
+    reviewedAt,
+  },
+  merge_fruit: {
+    description:
+      'Merge Fruit is a browser merging puzzle where falling pieces combine into larger fruit and space management decides the score.',
+    shortDescription:
+      'A fruit-merging puzzle about placement, chain reactions, and keeping enough board space open.',
+    editorialSummary:
+      'Merge Fruit is easy to start but depends heavily on placement discipline. The goal is to combine matching fruit into larger pieces, but every drop changes the available space. This page helps players understand that the game is not just random falling pieces. Good runs come from keeping similar fruit near each other, preserving open lanes, and avoiding piles that trap small pieces under larger ones. It is a good short-session puzzle because each attempt produces clear feedback: either the board stays flexible or it becomes crowded. Players who enjoy merge puzzles should focus on board shape before chasing large combinations.',
+    testedControls: 'Mouse or touch input for aiming and dropping pieces.',
+    deviceNotes:
+      'Works well on desktop and mobile. Touch control can feel natural if the drop preview is clear.',
+    playTips: [
+      'Keep matching fruit in the same area when possible.',
+      'Do not block the center with large pieces too early.',
+      'Leave room for small fruit to settle and combine.',
+      'Plan for the next drop, not only the current merge.',
+    ],
+    reviewedAt,
+  },
+  'street-racer-2': {
+    description:
+      'Street Racer 2 is a browser driving game focused on steering control, track awareness, and clean racing lines.',
+    shortDescription:
+      'A browser racing game where steady steering and track reading matter more than reckless speed.',
+    editorialSummary:
+      'Street Racer 2 is a practical racing pick for players who want immediate driving without installation. The important skill is clean control: accelerate when the track opens, slow or correct before tight turns, and avoid steering so sharply that the car loses rhythm. This page adds value by setting expectations before launch. It is not a full racing simulator, but it does reward players who learn the track and keep movement smooth. Keyboard input is usually the best starting point on desktop. If the frame does not capture input, click inside the game area first and consider fullscreen for better visibility.',
+    testedControls: 'Keyboard steering after focusing the iframe; menus may use mouse input.',
+    deviceNotes:
+      'Desktop keyboard play is recommended. Mobile depends on whether the embedded game exposes usable touch steering.',
+    playTips: [
+      'Click inside the game frame before using arrow or WASD controls.',
+      'Steer early rather than making sharp last-second turns.',
+      'Use fullscreen if the track edges are hard to see.',
+      'Learn one section of the route at a time.',
+    ],
+    reviewedAt,
+  },
+  'drift-no-limit': {
+    description:
+      'Drift No Limit is a browser racing game about controlled slides, corner timing, and balancing speed with stability.',
+    shortDescription:
+      'A drift-focused racing game where corner setup and smooth recovery decide each run.',
+    editorialSummary:
+      'Drift No Limit is different from a simple straight-line racer because the fun comes from controlled loss of grip. Players should expect to practice corner entry, slide angle, and recovery rather than just holding acceleration. This page is useful because it gives a clear starting approach: slow down enough to place the car, begin the turn early, and correct smoothly instead of snapping back and forth. The game is a good browser option for players who enjoy learning handling feel over repeated attempts. Desktop keyboard control is the safest way to start, while fullscreen can make judging corner distance much easier.',
+    testedControls: 'Keyboard steering and throttle after the iframe is focused.',
+    deviceNotes:
+      'Best on desktop. Mobile touch steering may be less precise for drift correction.',
+    playTips: [
+      'Set up the car before the corner instead of reacting mid-turn.',
+      'Use small corrections to recover from a drift.',
+      'Practice one track section until the timing feels predictable.',
+      'Choose fullscreen if speed makes corners hard to read.',
+    ],
+    reviewedAt,
+  },
+};
+
+function inferSourceName(game: GameInput) {
+  if (game.tags.includes('crazygames') || game.gameUrl.includes('crazygames.com')) {
+    return 'CrazyGames';
+  }
+  if (game.gameUrl.includes('gamedistribution.com')) {
+    return 'GameDistribution';
+  }
+  if (game.tags.includes('y8') || game.gameUrl.includes('y8.com')) {
+    return 'Y8 or associated provider';
+  }
+  if (game.gameUrl.includes('gamemonetize')) {
+    return 'GameMonetize';
+  }
+  return 'Third-party game provider';
+}
+
+function enrichGame(game: GameInput): Game {
+  const review = readyGameReviews[game.id];
+  const isReady = Boolean(review);
+
+  return {
+    ...game,
+    contentStatus: isReady ? 'ready' : 'needs_editorial',
+    adEligibility: isReady ? 'eligible' : 'excluded',
+    sourceName: inferSourceName(game),
+    sourceUrl: game.gameUrl,
+    licenseNote: DEFAULT_LICENSE_NOTE,
+    ...review,
+  };
+}
+
+export const games: Game[] = [...crazyGames, ...y8Games].map(enrichGame);
 
 export const getFeaturedGames = (): Game[] => {
   return games

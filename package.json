@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "audit:adsense": "node scripts/audit-games-content.mjs",
+    "test:audit-games": "node scripts/audit-games-content.test.mjs"
   },
   "dependencies": {
     "@next/third-parties": "^15.3.3",
