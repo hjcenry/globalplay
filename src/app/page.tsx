@@ -84,7 +84,7 @@ export default function HomePage() {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "GlobalPlay Games",
-            "description": "Professional free online games platform with thousands of premium games",
+            "description": "Independent browser game directory with category, search, and game detail pages",
             "url": "https://globalplay.games",
             "potentialAction": {
               "@type": "SearchAction",

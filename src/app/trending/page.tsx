@@ -3,7 +3,8 @@ import { getTrendingGames } from '@/data/games';
 
 export const metadata = {
   title: 'Trending Games - GlobalPlay Games',
-  description: 'Discover the most popular trending games on GlobalPlay. Play the hottest games that millions of players are enjoying right now.',
+  description:
+    'Discover popular browser games on GlobalPlay, ranked by catalog rating and play-count signals from the current game data.',
 };
 
 export default function TrendingPage() {
@@ -24,20 +25,20 @@ export default function TrendingPage() {
           <div className="section-header">
             <h1 className="page-title">📈 Trending Games</h1>
             <p className="page-description">
-              Discover the most popular games that are trending right now. 
-              These hottest picks are played by millions of gamers worldwide every day.
+              Discover popular games from the current GlobalPlay catalog. 
+              This page uses rating and play-count signals from our game data to surface strong starting points.
             </p>
           </div>
 
           <div className="games-stats">
             <div className="stat">
-              <strong>500+</strong> Trending Games
+              <strong>{trendingGames.length}</strong> Popular Listings
             </div>
             <div className="stat">
-              <strong>Updated</strong> Hourly
+              <strong>Sorted</strong> By Rating
             </div>
             <div className="stat">
-              <strong>2.5M+</strong> Daily Players
+              <strong>No</strong> Download Required
             </div>
           </div>
 

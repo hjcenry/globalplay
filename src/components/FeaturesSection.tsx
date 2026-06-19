@@ -3,22 +3,22 @@ export default function FeaturesSection() {
     {
       icon: "🚀",
       title: "Instant Play",
-      description: "No downloads required, click and play. All games are optimized to provide the best browser gaming experience."
+      description: "Open browser games directly from their game pages, with controls and category context listed before you play."
     },
     {
       icon: "🎯",
-      title: "Curated Content",
-      description: "Every game is handpicked and tested to ensure we provide you with high-quality gaming experiences."
+      title: "Organized Catalog",
+      description: "Browse by genre, popularity signals, recent additions, and related titles without installing a launcher."
     },
     {
       icon: "📱",
-      title: "Cross-Platform",
-      description: "Support for desktop, tablet and mobile devices, enjoy your favorite games anywhere, anytime."
+      title: "Browser First",
+      description: "Game pages are designed for modern desktop and mobile browsers, with fullscreen support where available."
     },
     {
       icon: "🔒",
-      title: "Safe & Secure",
-      description: "All games are security tested, virus-free and malware-free to protect your device safety."
+      title: "Clear Disclosures",
+      description: "Third-party game providers, analytics, advertising cookies, and trademark ownership are documented in plain language."
     }
   ];
 

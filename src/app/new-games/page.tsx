@@ -1,9 +1,10 @@
 import GameCard from '@/components/GameCard';
-import { getNewGames } from '@/data/games';
+import { categories, getNewGames } from '@/data/games';
 
 export const metadata = {
   title: 'New Games - GlobalPlay Games',
-  description: 'Discover the latest games added to GlobalPlay. Fresh new premium games updated daily for endless entertainment.',
+  description:
+    'Discover recently added browser games in the GlobalPlay catalog, with descriptions, controls, and category links.',
 };
 
 export default function NewGamesPage() {
@@ -24,20 +25,20 @@ export default function NewGamesPage() {
           <div className="section-header">
             <h1 className="page-title">🆕 New Games</h1>
             <p className="page-description">
-              Discover the latest premium games added to our platform. 
-              Fresh content updated daily with 50+ new games added every week.
+              Browse games marked as recent additions in the current catalog. 
+              Each page includes launch details, controls, category context, and related games.
             </p>
           </div>
 
           <div className="games-stats">
             <div className="stat">
-              <strong>50+</strong> Weekly Additions
+              <strong>{newGames.length}</strong> Recent Adds
             </div>
             <div className="stat">
-              <strong>Premium</strong> Quality
+              <strong>{categories.length}</strong> Categories
             </div>
             <div className="stat">
-              <strong>24/7</strong> Updates
+              <strong>Free</strong> Browser Play
             </div>
           </div>
 

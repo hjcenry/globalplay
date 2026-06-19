@@ -19,7 +19,7 @@ export default function Header() {
     <header className="header">
       <div className="nav-container">
         <Link href="/" className="logo">
-          🎮 GlobalPlay
+          GlobalPlay
         </Link>
         <div className="search-bar">
           <form onSubmit={handleSearch}>

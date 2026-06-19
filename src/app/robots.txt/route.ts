@@ -5,20 +5,19 @@ Allow: /
 # Sitemap
 Sitemap: https://globalplay.games/sitemap.xml
 
-# 禁止爬取一些不必要的目录
+# Keep non-page application endpoints out of search results.
 Disallow: /api/
-Disallow: /_next/
-Disallow: /.next/
 
-# 允许爬取游戏和分类页面
+# Allow page and asset crawling needed for rendering and ad review.
 Allow: /games/
 Allow: /categories/
 Allow: /trending
 Allow: /new-games
 Allow: /search
+Allow: /_next/
 
-# 爬取延迟 (可选)
-Crawl-delay: 1
+User-agent: Mediapartners-Google
+Allow: /
 `;
 
   return new Response(robotsTxt, {

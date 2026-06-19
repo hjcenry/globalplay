@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { categories, games, getFeaturedGames, getNewGames } from '@/data/games';
 
 interface StatItemProps {
   icon: string;
@@ -53,32 +54,35 @@ function StatItem({ icon, number, label, delay }: StatItemProps) {
 }
 
 export default function StatsSection() {
+  const featuredCount = getFeaturedGames().length;
+  const newCount = getNewGames().length;
+
   return (
     <section className="stats-section">
       <div className="container">
         <div className="stats-grid">
           <StatItem 
             icon="🎮" 
-            number="1200" 
-            label="Premium Games"
+            number={games.length.toString()} 
+            label="Available Games"
             delay={200}
           />
           <StatItem 
-            icon="👥" 
-            number="2500000" 
-            label="Active Players"
+            icon="🎯" 
+            number={categories.length.toString()} 
+            label="Game Categories"
             delay={400}
           />
           <StatItem 
-            icon="🎯" 
-            number="50000000" 
-            label="Games Played"
+            icon="⭐" 
+            number={featuredCount.toString()} 
+            label="Featured Picks"
             delay={600}
           />
           <StatItem 
-            icon="🌍" 
-            number="180" 
-            label="Countries Served"
+            icon="🆕" 
+            number={newCount.toString()} 
+            label="Recent Adds"
             delay={800}
           />
         </div>

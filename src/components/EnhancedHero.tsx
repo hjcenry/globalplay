@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { categories, games } from '@/data/games';
 
 export default function EnhancedHero() {
   const [mounted, setMounted] = useState(false);
@@ -26,13 +27,13 @@ export default function EnhancedHero() {
       )}
       
       <div className="hero-content">
-        <h1>🎯 World's Leading Free Gaming Platform</h1>
+        <h1>🎯 Free Browser Games, Organized for Quick Play</h1>
         <p>
-          Join 2.5M+ players worldwide! 1200+ premium games, instant play, zero downloads.
-          Experience the ultimate gaming destination with new content added daily.
+          Browse {games.length} playable web games across {categories.length} focused genres.
+          Find controls, category notes, related games, and clear third-party source disclosures before you launch.
         </p>
         <Link href="#featured" className="cta-button">
-          🚀 Join Millions of Players
+          🚀 Browse Featured Games
         </Link>
       </div>
     </section>
