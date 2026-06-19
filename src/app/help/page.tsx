@@ -5,16 +5,16 @@ export default function HelpPage() {
   return (
     <div className="help-container">
       <div className="help-header">
-        <h1>Help Center — GlobalPlay</h1>
+        <h1>Help Center - GlobalPlay</h1>
         <p className="help-subtitle">
-          Welcome to <strong>GlobalPlay</strong>, one place for discovering, playing and sharing thousands of free web games.
-          If you've ever used Steam to browse a catalog, Miniclip to jump straight into a quick round, or Twitch to follow your favorite creators, you'll feel right at home. This page collects the most common questions and tips so you can get from "just landed" to "just one more level!" in minutes.
+          Practical help for browsing the catalog, launching embedded browser games, handling controls, and reporting
+          broken pages.
         </p>
       </div>
 
       <div className="help-content">
         <section className="help-section">
-          <h2>1. Quick-Start Checklist ✔️</h2>
+          <h2>1. Start Playing</h2>
           <div className="checklist-table">
             <table>
               <thead>
@@ -27,23 +27,23 @@ export default function HelpPage() {
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td><strong>Open a game.</strong> Click any thumbnail on the home page or in a category list.</td>
-                  <td>We use instant-load iframes, so most titles start in 1-2 seconds—no installer needed.</td>
+                  <td>Open a category, popular list, new games page, or search result.</td>
+                  <td>These pages group playable listings and help you compare similar games.</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td><strong>Allow cookies / local storage</strong> when prompted.</td>
-                  <td>Your progress, highscores and control settings are saved on your device—similar to Roblox's "auto-save" or Candy Crush's level memory.</td>
+                  <td>Read the game page before launching.</td>
+                  <td>Each listing shows controls, category, source context, and related games.</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td><strong>Go full screen</strong> (⤢ icon).</td>
-                  <td>Maximizes performance and hides distractions.</td>
+                  <td>Click inside the game frame after it loads.</td>
+                  <td>Browsers often require iframe focus before keyboard controls work.</td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td><strong>Create an optional account</strong>.</td>
-                  <td>Sync your favorites across devices, earn badges and appear on leaderboards.</td>
+                  <td>Use fullscreen only when the embedded provider supports it.</td>
+                  <td>Fullscreen availability can vary by game provider and browser.</td>
                 </tr>
               </tbody>
             </table>
@@ -51,103 +51,56 @@ export default function HelpPage() {
         </section>
 
         <section className="help-section">
-          <h2>2. Finding Games 🔍</h2>
-          
+          <h2>2. Finding Games</h2>
           <div className="subsection">
-            <h3>Browse</h3>
-            <ul>
-              <li><strong>Trending</strong> – what's hot this week, ranked by plays and likes (Twitch-style "Just Chatting" list, but for games).</li>
-              <li><strong>Genres</strong> – action, puzzle, idle, multiplayer, retro, etc.</li>
-              <li><strong>Tags</strong> – "platformer," "turn-based," "roguelike," "2-player couch," and more.</li>
-            </ul>
+            <h3>Browse by category</h3>
+            <p>
+              Use <Link href="/categories">Game Categories</Link> to choose action, puzzle, strategy, racing,
+              shooting, or adventure games. Category pages include notes about pacing and controls.
+            </p>
           </div>
-
           <div className="subsection">
-            <h3>Search</h3>
-            <p>Type the game title, tag, or developer into the search bar. Results update in real time—no page reloads (inspired by Steam's instant filtering).</p>
+            <h3>Use search</h3>
+            <p>
+              Search works best with a game title, genre, or simple keyword. If you do not find a match, browse the
+              closest category and use related games from individual game pages.
+            </p>
           </div>
-
           <div className="subsection">
-            <h3>Collections</h3>
-            <p>Curated packs such as "Five-Minute Breaks," "Keyboard-Only," or "Built With Godot." Follow a collection to receive email or push alerts when a new title drops.</p>
+            <h3>Popular and recent lists</h3>
+            <p>
+              <Link href="/trending">Popular Games</Link> uses rating and play-count signals from the catalog data.
+              <Link href="/new-games"> New Games</Link> shows titles marked as recent additions.
+            </p>
           </div>
         </section>
 
         <section className="help-section">
-          <h2>3. Playing & Controls 🎮</h2>
+          <h2>3. Controls and Devices</h2>
           <div className="controls-table">
             <table>
               <thead>
                 <tr>
-                  <th>Device</th>
-                  <th>Default controls</th>
-                  <th>Tips</th>
+                  <th>Control type</th>
+                  <th>What to check</th>
+                  <th>Tip</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Desktop keyboard</td>
-                  <td>Arrow/WASD + Space/Enter</td>
-                  <td>Tap <strong>?</strong> in-game for a full key map.</td>
+                  <td>Keyboard</td>
+                  <td>Look for arrow, WASD, space, enter, or game-specific prompts.</td>
+                  <td>Click the iframe once before pressing keys.</td>
                 </tr>
                 <tr>
-                  <td>Mouse / trackpad</td>
-                  <td>Point-and-click</td>
-                  <td>Hold <strong>[F]</strong> for full-screen in most games.</td>
+                  <td>Mouse</td>
+                  <td>Use the cursor for aiming, drawing, dragging, or menu choices.</td>
+                  <td>Disable browser zoom if precise clicking feels offset.</td>
                 </tr>
                 <tr>
-                  <td>Mobile touch</td>
-                  <td>On-screen overlay</td>
-                  <td>Rotate to landscape for smoother play.</td>
-                </tr>
-                <tr>
-                  <td>Gamepad</td>
-                  <td>Most USB & Bluetooth pads auto-map</td>
-                  <td>Remap in <strong>Settings → Controller</strong>.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="performance-note">
-            <p><strong>Performance Note:</strong> We stream the game assets from the original publisher's CDN whenever possible (like Epic's launcher). If a game lags, toggle "Low-Spec Mode" in the ⚙️ menu to drop visuals but keep 60 fps.</p>
-          </div>
-        </section>
-
-        <section className="help-section">
-          <h2>4. Saving Progress & Cloud Sync ☁️</h2>
-          <ul>
-            <li><strong>Guest mode:</strong> Your progress is saved in the browser's localStorage—clear cookies = clear save.</li>
-            <li><strong>Account mode (free):</strong> Connect an email or Google/Facebook. We hash your data client-side and sync only encrypted snapshots.</li>
-            <li><strong>Coming soon:</strong> Cross-device resume, similar to Roblox's "recently played."</li>
-          </ul>
-        </section>
-
-        <section className="help-section">
-          <h2>5. Social & Community 🤝</h2>
-          <div className="social-table">
-            <table>
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th>How it works</th>
-                  <th>Privacy controls</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Leaderboards</td>
-                  <td>Daily / weekly / all-time highscores per game.</td>
-                  <td>Opt-out in <strong>Profile → Privacy</strong>.</td>
-                </tr>
-                <tr>
-                  <td>Reactions</td>
-                  <td>"🔥," "😂," "💡," and text comments.</td>
-                  <td>Hidden from guests by default; filter strong language automatically.</td>
-                </tr>
-                <tr>
-                  <td>Clips</td>
-                  <td>Press <strong>[C]</strong> (desktop) or "Clip" (mobile) to capture the last 15 s and share a link—think Twitch clip, but no livestream needed.</td>
-                  <td>Clips are public, but you can delete any you own.</td>
+                  <td>Touch</td>
+                  <td>Some games expose on-screen controls on mobile.</td>
+                  <td>Rotate to landscape when the frame is too narrow.</td>
                 </tr>
               </tbody>
             </table>
@@ -155,94 +108,60 @@ export default function HelpPage() {
         </section>
 
         <section className="help-section">
-          <h2>6. Parental Controls 👨‍👩‍👧‍👦</h2>
-          <ul>
-            <li><strong>Age gates</strong> on M-rated or user-flagged violent titles.</li>
-            <li><strong>Play-time limiter:</strong> Turn on daily or weekly caps per account.</li>
-            <li><strong>Content filter:</strong> Hide chat and user-generated comments site-wide.</li>
-          </ul>
-          <p>Parents can lock settings behind a 4-digit PIN (patterned after Roblox's parental PIN).</p>
-        </section>
-
-        <section className="help-section">
-          <h2>7. Safety & Reporting 🛡️</h2>
-          <ul>
-            <li>Every game is virus-scanned on upload and sandbox-tested.</li>
-            <li>Ads, if any, are limited to static banner placements; no pop-ups, no auto audio.</li>
-            <li>See something bad? Click the 🚩 flag under any game, comment or clip. Moderators review within 24 h (like Steam's community flag queue).</li>
-          </ul>
-        </section>
-
-        <section className="help-section">
-          <h2>8. Troubleshooting 🛠️</h2>
+          <h2>4. Troubleshooting</h2>
           <div className="troubleshooting-table">
             <table>
               <thead>
                 <tr>
                   <th>Problem</th>
-                  <th>Quick fix</th>
+                  <th>What to try</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Game doesn't load</td>
-                  <td>Disable ad-block for this page or try a different browser.</td>
+                  <td>Game does not load</td>
+                  <td>Refresh the page, try another browser, or check whether an extension blocks third-party frames.</td>
                 </tr>
                 <tr>
-                  <td>Keyboard not recognized</td>
-                  <td>Click once inside the game iframe; browsers sometimes capture focus.</td>
+                  <td>Keyboard does not respond</td>
+                  <td>Click inside the game frame, then try the controls listed on the game page.</td>
                 </tr>
                 <tr>
-                  <td>Progress lost</td>
-                  <td>Make sure third-party cookies aren't blocked, or sign in for cloud sync.</td>
+                  <td>Fullscreen is unavailable</td>
+                  <td>Use the game provider&apos;s in-frame fullscreen button if available, or enlarge the browser window.</td>
                 </tr>
                 <tr>
-                  <td>Lag spikes</td>
-                  <td>Turn off other browser tabs, enable "Low-Spec Mode," or reduce resolution in-game.</td>
+                  <td>Game was removed or changed</td>
+                  <td>Report the URL so we can review the listing and update or remove it.</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p>More help? See <strong>Settings → Diagnose</strong> to run an automatic test and generate a shareable log.</p>
         </section>
 
         <section className="help-section">
-          <h2>9. Frequently Asked Questions (FAQ) ❓</h2>
-          <div className="faq-list">
-            <div className="faq-item">
-              <h4>Q: Are all games really free?</h4>
-              <p>A: Yes. Some titles may offer optional cosmetic purchases handled by the original developer; GlobalPlay never charges you directly.</p>
-            </div>
-            <div className="faq-item">
-              <h4>Q: Can I upload my own game?</h4>
-              <p>A: Absolutely—check the <strong>Developer Portal</strong> link in the footer. We support HTML5, WebGL, Construct, Unity Web export and Godot.</p>
-            </div>
-            <div className="faq-item">
-              <h4>Q: Do I need to install anything?</h4>
-              <p>A: No downloads, no plugins. Everything runs in the browser, just like Miniclip's one-click model.</p>
-            </div>
-            <div className="faq-item">
-              <h4>Q: Is there a desktop app?</h4>
-              <p>A: A lightweight PWA (Progressive Web App) is in beta—install it from your browser's "Add to Home Screen" prompt for offline caching and desktop shortcuts.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="help-section">
-          <h2>10. Contact & Feedback 💬</h2>
+          <h2>5. Privacy, Cookies, and Ads</h2>
           <ul>
-            <li><strong>Email:</strong> <a href="mailto:support@globalplay.games">support@globalplay.games</a></li>
-            <li><strong>Discord:</strong> join our community &lt;discord.gg/globalplay&gt;</li>
-            <li><strong>X / Twitter:</strong> @GlobalPlay</li>
-            <li><strong>Office hours (UTC):</strong> 09:00 – 18:00 Monday – Friday (excluding holidays)</li>
+            <li>GlobalPlay does not require an account to browse or launch games.</li>
+            <li>Optional analytics load only after you accept analytics cookies.</li>
+            <li>Embedded third-party games may process technical data needed to deliver the game.</li>
+            <li>Advertising cookies and AdSense disclosures are explained in the privacy policy.</li>
           </ul>
-          <p>We read every suggestion—many of GlobalPlay's features (badges, clips, dark mode) came from player feedback!</p>
+          <p>
+            Read the <Link href="/privacy-policy">Privacy Policy</Link> and{' '}
+            <Link href="/terms">Terms & Disclaimer</Link> for details.
+          </p>
         </section>
 
-        <section className="help-section final-section">
-          <h2>🚀 See you in-game!</h2>
-          <p>Enjoy exploring, competing and creating. If you spot a bug, hit <strong>Feedback</strong> in the sidebar; if you beat the global highscore, brag on social and tag us—your clip might get featured on the front page!</p>
-          <p className="happy-gaming">Happy gaming! 🕹️</p>
+        <section className="help-section">
+          <h2>6. Reporting Problems</h2>
+          <p>
+            Use the contact page for broken games, incorrect descriptions, privacy questions, or rights-holder
+            concerns. Include the page URL and a short description of what should be reviewed.
+          </p>
+          <p>
+            <Link href="/contact" className="inline-link">Contact GlobalPlay</Link>
+          </p>
         </section>
       </div>
 
@@ -257,5 +176,6 @@ export default function HelpPage() {
 
 export const metadata = {
   title: 'Help Center - GlobalPlay',
-  description: 'Get help with GlobalPlay - your free online games platform. Find answers to common questions, troubleshooting tips, and learn how to get the most out of your gaming experience.',
-}; 
+  description:
+    'Help for using GlobalPlay.games, including browsing, controls, embedded game troubleshooting, privacy, cookies, ads, and reporting issues.',
+};

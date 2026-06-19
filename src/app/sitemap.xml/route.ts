@@ -6,15 +6,16 @@ export async function GET() {
   // 静态页面
   const staticPages = [
     '',
+    '/all-games',
     '/categories',
     '/trending',
     '/new-games',
-    '/search',
     '/help',
     '/guides',
     '/about',
+    '/contact',
     '/sitemap',
-    '/privacy',
+    '/privacy-policy',
     '/terms',
   ];
 

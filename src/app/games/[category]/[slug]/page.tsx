@@ -70,8 +70,14 @@ export default function GamePage({ params }: GamePageProps) {
     notFound();
   }
 
-  const categoryName = categories.find(cat => cat.id === game.category)?.name || 'Games';
+  const category = categories.find(cat => cat.id === game.category);
+  const categoryName = category?.name || 'Games';
   const relatedGames = games.filter(g => g.category === game.category && g.slug !== game.slug).slice(0, 4);
+  const sourceLabel = game.tags.includes('crazygames')
+    ? 'CrazyGames'
+    : game.tags.includes('y8')
+      ? 'Y8 or GameDistribution'
+      : 'a third-party game provider';
 
   const formatPlayCount = (count: number): string => {
     if (count >= 1000000) {
@@ -105,7 +111,7 @@ export default function GamePage({ params }: GamePageProps) {
       {/* Game Hero Section */}
       <section className="game-hero">
         <div className="hero-content">
-          <h1>🧟 {game.title}</h1>
+          <h1>{category?.icon} {game.title}</h1>
           <p className="game-tagline">{game.shortDescription}</p>
           <a href="#game-frame" className="play-button">🚀 Play Now</a>
         </div>
@@ -126,13 +132,12 @@ export default function GamePage({ params }: GamePageProps) {
               <h2>🎯 About {game.title}</h2>
               <p>{game.description}</p>
               <p>
-                Experience the thrill of {game.title} with smooth controls, stunning visual effects, and addictive 
-                gameplay that will keep you coming back for more. Perfect for both casual gaming sessions and 
-                competitive play.
+                This listing is organized under {categoryName}. The listed control style is {game.controls}, and the
+                game is launched in a browser iframe when the third-party provider is available.
               </p>
               <p>
-                {game.title} features dynamic gameplay with increasing difficulty and multiple 
-                upgrades. Strategic thinking and quick reflexes are essential for achieving high scores.
+                GlobalPlay.games is an independent directory and is not the developer, publisher, or official brand
+                site for {game.title}. Game names, logos, screenshots, and trademarks belong to their respective owners.
               </p>
             </div>
             
@@ -165,6 +170,10 @@ export default function GamePage({ params }: GamePageProps) {
                 <span className="stat-label">Full Screen</span>
                 <span className="stat-value">Yes</span>
               </div>
+              <div className="stat-item">
+                <span className="stat-label">Source</span>
+                <span className="stat-value">{sourceLabel}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -177,26 +186,26 @@ export default function GamePage({ params }: GamePageProps) {
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">⚔️</div>
-              <h3 className="feature-title">Game Controls</h3>
+              <h3 className="feature-title">Use the listed controls</h3>
               <p className="feature-description">
-                Use {game.controls.toLowerCase()} to control your character. 
-                Master the controls to achieve the highest scores and unlock achievements.
+                Use {game.controls.toLowerCase()} for this game. Click once inside the game frame first if keyboard
+                input is not recognized.
               </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">💎</div>
-              <h3 className="feature-title">Collect & Upgrade</h3>
+              <div className="feature-icon">🖥️</div>
+              <h3 className="feature-title">Play in the browser</h3>
               <p className="feature-description">
-                Gather power-ups and special items to enhance your abilities and 
-                unlock new features throughout the game.
+                The game opens in an embedded browser frame. If it does not load, refresh the page or check whether a
+                browser extension is blocking third-party frames.
               </p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🚀</div>
-              <h3 className="feature-title">Level Up</h3>
+              <div className="feature-icon">🧭</div>
+              <h3 className="feature-title">Find related games</h3>
               <p className="feature-description">
-                Progress through levels, gain experience, and unlock powerful upgrades 
-                to become the ultimate champion.
+                Use the related game section below to compare other {categoryName.toLowerCase()} with similar controls
+                or pacing.
               </p>
             </div>
           </div>
@@ -232,18 +241,12 @@ export default function GamePage({ params }: GamePageProps) {
             "platform": "Web Browser",
             "operatingSystem": "Any",
             "applicationCategory": "Game",
+            "isAccessibleForFree": true,
             "offers": {
               "@type": "Offer",
               "price": "0",
               "priceCurrency": "USD",
               "availability": "https://schema.org/InStock"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": game.rating.toString(),
-              "ratingCount": "1247",
-              "bestRating": "5",
-              "worstRating": "1"
             },
             "publisher": {
               "@type": "Organization",

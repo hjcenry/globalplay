@@ -22,7 +22,7 @@ export default function SitemapPage() {
           Explore all pages and game content on GlobalPlay to quickly find what you're looking for.
         </p>
         <div className="last-updated">
-          Last updated: December 2024
+          Last updated: June 19, 2026
         </div>
       </div>
 
@@ -47,14 +47,15 @@ export default function SitemapPage() {
                 <li><Link href="/help">Game Help</Link></li>
                 <li><Link href="/guides">Game Guides</Link></li>
                 <li><Link href="/about">About Us</Link></li>
+                <li><Link href="/contact">Contact</Link></li>
                 <li><Link href="/sitemap">Sitemap</Link></li>
               </ul>
             </div>
             <div className="link-category">
               <h3>⚖️ Legal Information</h3>
               <ul>
-                <li><Link href="/privacy">Privacy Policy</Link></li>
-                <li><Link href="/terms">Terms of Service</Link></li>
+                <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+                <li><Link href="/terms">Terms & Disclaimer</Link></li>
               </ul>
             </div>
           </div>
@@ -157,7 +158,7 @@ export default function SitemapPage() {
           <h2>📋 All Games (A-Z)</h2>
           <div className="alphabetical-games">
             {Object.entries(
-              games
+              [...games]
                 .sort((a, b) => a.title.localeCompare(b.title))
                 .reduce((acc: { [key: string]: typeof games }, game) => {
                   const firstLetter = game.title.charAt(0).toUpperCase();
@@ -208,7 +209,7 @@ export default function SitemapPage() {
             </div>
             <div className="stat-item">
               <div className="stat-number">{games.reduce((total, game) => total + game.playCount, 0).toLocaleString()}</div>
-              <div className="stat-label">Total Plays</div>
+              <div className="stat-label">Catalog Play Signals</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">{(games.reduce((total, game) => total + game.rating, 0) / games.length).toFixed(1)}</div>
@@ -223,11 +224,11 @@ export default function SitemapPage() {
           <h3>📝 About This Sitemap</h3>
           <p>
             This sitemap contains all major pages and game links on the GlobalPlay website. 
-            We regularly update our game content to provide you with the latest and best online gaming experience.
+            It is designed to help users and crawlers find category pages, trust pages, and playable game listings.
           </p>
           <p>
             If you encounter any issues while using our site or have any suggestions, please contact us through the 
-            <Link href="/help"> Help page</Link>.
+            <Link href="/contact"> Contact page</Link>.
           </p>
         </div>
         <BackToTop />

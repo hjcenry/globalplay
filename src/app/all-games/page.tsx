@@ -1,14 +1,15 @@
 import GameCard from '@/components/GameCard';
-import { games } from '@/data/games';
+import { categories, games } from '@/data/games';
 
 export const metadata = {
   title: 'All Games - GlobalPlay Games',
-  description: 'Browse all games available on GlobalPlay. Over 1200+ premium online games including action, puzzle, strategy, racing, adventure, and shooting games.',
+  description:
+    'Browse all games available on GlobalPlay, organized across action, puzzle, strategy, racing, shooting, and adventure categories.',
 };
 
 export default function AllGamesPage() {
   // 按评分和游玩次数排序所有游戏
-  const allGames = games
+  const allGames = [...games]
     .sort((a, b) => {
       // 先按评分降序排序
       if (a.rating !== b.rating) {
@@ -33,20 +34,20 @@ export default function AllGamesPage() {
           <div className="section-header">
             <h1 className="page-title">🎮 All Games</h1>
             <p className="page-description">
-              Discover our complete collection of 1200+ premium online games. 
-              From action-packed adventures to brain-teasing puzzles, find your next favorite game here.
+              Browse the complete GlobalPlay catalog of {allGames.length} browser games. 
+              Use the category labels, controls, ratings, and related game links to choose what to play next.
             </p>
           </div>
 
           <div className="games-stats">
             <div className="stat">
-              <strong>1200+</strong> Premium Games
+              <strong>{allGames.length}</strong> Available Games
             </div>
             <div className="stat">
-              <strong>15</strong> Categories
+              <strong>{categories.length}</strong> Categories
             </div>
             <div className="stat">
-              <strong>100%</strong> Free to Play
+              <strong>0</strong> Required Downloads
             </div>
           </div>
 
