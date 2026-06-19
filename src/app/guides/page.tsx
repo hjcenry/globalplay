@@ -1,13 +1,20 @@
 import Link from 'next/link';
-import { categories, games } from '@/data/games';
+import { getIndexableCategories, getIndexableCategoryCount } from '@/data/games';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Browser Game Guides - GlobalPlay',
   description:
     'Practical browser gaming guides for choosing categories, fixing loading issues, understanding controls, privacy settings, and third-party game embeds.',
+  alternates: {
+    canonical: canonical('/guides'),
+  },
 };
 
 export default function GuidesPage() {
+  const categories = getIndexableCategories();
+
   return (
     <>
       <div className="breadcrumb">
@@ -31,7 +38,7 @@ export default function GuidesPage() {
               <div className="feature-icon">🧭</div>
               <h2 className="feature-title">Choosing a Game</h2>
               <p className="feature-description">
-                Start with a category that matches your session length. Action, racing, and shooting usually work well
+                Start with a category that matches your session length. Action and racing usually work well
                 for quick rounds. Puzzle and strategy pages are better when you want slower decisions. Adventure games
                 tend to vary the most, so check controls and related titles before launching.
               </p>
@@ -74,12 +81,12 @@ export default function GuidesPage() {
           <h2 className="section-title">Category Guide</h2>
           <div className="categories-grid">
             {categories.map((category) => {
-              const count = games.filter((game) => game.category === category.id).length;
+              const count = getIndexableCategoryCount(category.id);
               return (
                 <Link key={category.id} href={`/categories/${category.id}`} className="category-card">
                   <div className="category-icon">{category.icon}</div>
                   <div className="category-name">{category.name}</div>
-                  <div className="category-count">{count} games</div>
+                  <div className="category-count">{count} reviewed games</div>
                 </Link>
               );
             })}

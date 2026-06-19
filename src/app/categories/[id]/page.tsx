@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import GameCard from '@/components/GameCard';
-import { getGamesByCategory, categories } from '@/data/games';
+import { getGamesByCategory, categories, getIndexableCategories } from '@/data/games';
 import type { Metadata } from 'next';
 import { canonical } from '@/lib/seo';
 
@@ -59,16 +59,23 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     };
   }
 
+  const categoryGames = getGamesByCategory(category.id);
+  const isIndexable = categoryGames.length > 0;
+
   return {
     title: `${category.name} - Free Online Games | GlobalPlay.games`,
-    description: `Play the best free ${category.name.toLowerCase()} online. Over ${category.count} games available to play instantly in your browser!`,
+    description: `Browse reviewed ${category.name.toLowerCase()} on GlobalPlay. ${categoryGames.length} games are currently approved for indexing in this category.`,
     keywords: `${category.name.toLowerCase()}, free online games, browser games, ${category.id} games`,
+    robots: {
+      index: isIndexable,
+      follow: true,
+    },
     alternates: {
       canonical: canonical(`/categories/${category.id}`),
     },
     openGraph: {
       title: `${category.name} - Free Online Games`,
-      description: `Play the best free ${category.name.toLowerCase()} online. Over ${category.count} games available!`,
+      description: `Browse reviewed ${category.name.toLowerCase()} on GlobalPlay.`,
       url: `https://globalplay.games/categories/${category.id}`,
       type: 'website',
     },
@@ -84,6 +91,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
 
   const games = getGamesByCategory(params.id);
   const detail = categoryDetails[params.id];
+  const otherCategories = getIndexableCategories().filter(cat => cat.id !== params.id);
 
   return (
     <>
@@ -150,7 +158,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
         <div className="container">
           <h2 className="section-title">🎯 Explore Other Categories</h2>
           <div className="categories-grid">
-            {categories.filter(cat => cat.id !== params.id).map((otherCategory) => (
+            {otherCategories.map((otherCategory) => (
               <Link
                 key={otherCategory.id}
                 href={`/categories/${otherCategory.id}`}
@@ -158,7 +166,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
               >
                 <div className="category-icon">{otherCategory.icon}</div>
                 <div className="category-name">{otherCategory.name}</div>
-                <div className="category-count">{otherCategory.count.toLocaleString()} games</div>
+                <div className="category-count">{getGamesByCategory(otherCategory.id).length.toLocaleString()} reviewed games</div>
               </Link>
             ))}
           </div>

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getGameBySlug, games, categories } from '@/data/games';
+import { getGameBySlug, games, categories, getIndexableGames } from '@/data/games';
 import type { Metadata } from 'next';
 import GameClient from './GameClient';
 import GameCard from '@/components/GameCard';
@@ -82,7 +82,9 @@ export default function GamePage({ params }: GamePageProps) {
 
   const category = categories.find(cat => cat.id === game.category);
   const categoryName = category?.name || 'Games';
-  const relatedGames = games.filter(g => g.category === game.category && g.slug !== game.slug).slice(0, 4);
+  const relatedGames = getIndexableGames()
+    .filter(g => g.category === game.category && g.slug !== game.slug)
+    .slice(0, 4);
   const sourceLabel = game.sourceName;
 
   const formatPlayCount = (count: number): string => {

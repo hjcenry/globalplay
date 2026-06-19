@@ -1,5 +1,16 @@
 import Link from 'next/link';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 import './terms.css';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service and Disclaimer - GlobalPlay',
+  description:
+    'Terms of Service for GlobalPlay.games, including third-party game disclosures, trademark disclaimer, acceptable use, ads, and analytics.',
+  alternates: {
+    canonical: canonical('/terms'),
+  },
+};
 
 export default function TermsPage() {
   return (
@@ -193,9 +204,3 @@ export default function TermsPage() {
     </div>
   );
 }
-
-export const metadata = {
-  title: 'Terms of Service and Disclaimer - GlobalPlay',
-  description:
-    'Terms of Service for GlobalPlay.games, including third-party game disclosures, trademark disclaimer, acceptable use, ads, and analytics.',
-};

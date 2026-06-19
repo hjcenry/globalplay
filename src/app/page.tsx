@@ -3,11 +3,20 @@ import GameCard from '@/components/GameCard';
 import StatsSection from '@/components/StatsSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import EnhancedHero from '@/components/EnhancedHero';
-import { getFeaturedGames, getTrendingGames, categories } from '@/data/games';
+import { getFeaturedGames, getTrendingGames, getIndexableCategories, getIndexableCategoryCount } from '@/data/games';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: canonical('/'),
+  },
+};
 
 export default function HomePage() {
   const featuredGames = getFeaturedGames();
   const trendingGames = getTrendingGames();
+  const categories = getIndexableCategories();
 
   return (
     <>
@@ -49,7 +58,7 @@ export default function HomePage() {
               >
                 <div className="category-icon">{category.icon}</div>
                 <div className="category-name">{category.name}</div>
-                <div className="category-count">{category.count.toLocaleString()} games</div>
+                <div className="category-count">{getIndexableCategoryCount(category.id).toLocaleString()} reviewed games</div>
               </Link>
             ))}
           </div>

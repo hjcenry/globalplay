@@ -1,16 +1,28 @@
 import Link from 'next/link';
-import { categories, games, getFeaturedGames, getTrendingGames } from '@/data/games';
+import {
+  getFeaturedGames,
+  getIndexableCategories,
+  getIndexableGames,
+  getTrendingGames,
+} from '@/data/games';
 import BackToTop from './BackToTop';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 import './sitemap.css';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Sitemap - GlobalPlay Games',
   description: 'Browse the complete sitemap of GlobalPlay to quickly find all game categories, popular games, and website pages. Includes action, puzzle, strategy, racing and other free online games.',
   keywords: 'sitemap, game categories, online games, free games, GlobalPlay',
   robots: 'index, follow',
+  alternates: {
+    canonical: canonical('/sitemap'),
+  },
 };
 
 export default function SitemapPage() {
+  const games = getIndexableGames();
+  const categories = getIndexableCategories();
   const featuredGames = getFeaturedGames();
   const trendingGames = getTrendingGames();
 
@@ -193,7 +205,7 @@ export default function SitemapPage() {
           <div className="stats-grid">
             <div className="stat-item">
               <div className="stat-number">{games.length}</div>
-              <div className="stat-label">Total Games</div>
+              <div className="stat-label">Reviewed Games</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">{categories.length}</div>

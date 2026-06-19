@@ -1,5 +1,5 @@
 import GameCard from '@/components/GameCard';
-import { categories, getNewGames } from '@/data/games';
+import { getIndexableCategories, getNewGames } from '@/data/games';
 import { canonical } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 export default function NewGamesPage() {
   const newGames = getNewGames();
+  const categories = getIndexableCategories();
 
   return (
     <>
@@ -40,7 +41,7 @@ export default function NewGamesPage() {
               <strong>{newGames.length}</strong> Recent Adds
             </div>
             <div className="stat">
-              <strong>{categories.length}</strong> Categories
+              <strong>{categories.length}</strong> Reviewed Categories
             </div>
             <div className="stat">
               <strong>Free</strong> Browser Play

@@ -1,4 +1,4 @@
-import { categories, games, getFeaturedGames, getNewGames } from '@/data/games';
+import { getFeaturedGames, getIndexableCategories, getIndexableGames, getNewGames } from '@/data/games';
 
 interface StatItemProps {
   icon: string;
@@ -29,6 +29,8 @@ function StatItem({ icon, number, label }: StatItemProps) {
 }
 
 export default function StatsSection() {
+  const reviewedGameCount = getIndexableGames().length;
+  const reviewedCategoryCount = getIndexableCategories().length;
   const featuredCount = getFeaturedGames().length;
   const newCount = getNewGames().length;
 
@@ -38,12 +40,12 @@ export default function StatsSection() {
         <div className="stats-grid">
           <StatItem 
             icon="🎮" 
-            number={games.length.toString()} 
-            label="Available Games"
+            number={reviewedGameCount.toString()} 
+            label="Reviewed Games"
           />
           <StatItem 
             icon="🎯" 
-            number={categories.length.toString()} 
+            number={reviewedCategoryCount.toString()} 
             label="Game Categories"
           />
           <StatItem 

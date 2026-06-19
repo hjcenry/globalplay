@@ -1,5 +1,16 @@
 import Link from 'next/link';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 import './help.css';
+
+export const metadata: Metadata = {
+  title: 'Help Center - GlobalPlay',
+  description:
+    'Help for using GlobalPlay.games, including browsing, controls, embedded game troubleshooting, privacy, cookies, ads, and reporting issues.',
+  alternates: {
+    canonical: canonical('/help'),
+  },
+};
 
 export default function HelpPage() {
   return (
@@ -56,7 +67,7 @@ export default function HelpPage() {
             <h3>Browse by category</h3>
             <p>
               Use <Link href="/categories">Game Categories</Link> to choose action, puzzle, strategy, racing,
-              shooting, or adventure games. Category pages include notes about pacing and controls.
+              or adventure games. Category pages include notes about pacing and controls.
             </p>
           </div>
           <div className="subsection">
@@ -173,9 +184,3 @@ export default function HelpPage() {
     </div>
   );
 }
-
-export const metadata = {
-  title: 'Help Center - GlobalPlay',
-  description:
-    'Help for using GlobalPlay.games, including browsing, controls, embedded game troubleshooting, privacy, cookies, ads, and reporting issues.',
-};

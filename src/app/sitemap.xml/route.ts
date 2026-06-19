@@ -1,4 +1,4 @@
-import { categories, games } from '@/data/games';
+import { getIndexableCategories, games } from '@/data/games';
 import { isIndexableGame } from '@/lib/gamePolicy';
 import { SITE_URL } from '@/lib/seo';
 
@@ -22,7 +22,7 @@ export async function GET() {
   ];
 
   // 分类页面
-  const categoryPages = categories.map(category => `/categories/${category.id}`);
+  const categoryPages = getIndexableCategories().map(category => `/categories/${category.id}`);
 
   // 游戏页面
   const gamePages = games

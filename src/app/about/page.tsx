@@ -1,8 +1,27 @@
 import Link from 'next/link';
-import { categories, games, getFeaturedGames, getNewGames, getTrendingGames } from '@/data/games';
+import {
+  getFeaturedGames,
+  getIndexableCategories,
+  getIndexableGames,
+  getNewGames,
+  getTrendingGames,
+} from '@/data/games';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 import './about.css';
 
+export const metadata: Metadata = {
+  title: 'About GlobalPlay - Independent Browser Game Directory',
+  description:
+    'Learn what GlobalPlay.games publishes, how the reviewed browser game catalog is organized, and how to contact the site publisher.',
+  alternates: {
+    canonical: canonical('/about'),
+  },
+};
+
 export default function AboutPage() {
+  const reviewedGames = getIndexableGames();
+  const reviewedCategories = getIndexableCategories();
   const featuredCount = getFeaturedGames().length;
   const trendingCount = getTrendingGames().length;
   const newCount = getNewGames().length;
@@ -36,12 +55,12 @@ export default function AboutPage() {
           <h2>Catalog Snapshot</h2>
           <div className="stats-grid">
             <div className="stat-card">
-              <div className="stat-number">{games.length}</div>
-              <div className="stat-label">Available Games</div>
+              <div className="stat-number">{reviewedGames.length}</div>
+              <div className="stat-label">Reviewed Games</div>
             </div>
             <div className="stat-card">
-              <div className="stat-number">{categories.length}</div>
-              <div className="stat-label">Categories</div>
+              <div className="stat-number">{reviewedCategories.length}</div>
+              <div className="stat-label">Reviewed Categories</div>
             </div>
             <div className="stat-card">
               <div className="stat-number">{featuredCount}</div>
@@ -53,7 +72,7 @@ export default function AboutPage() {
             </div>
             <div className="stat-card">
               <div className="stat-number">{newCount}</div>
-              <div className="stat-label">Recent Adds</div>
+              <div className="stat-label">Recent Reviewed Adds</div>
             </div>
           </div>
         </section>
@@ -171,9 +190,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-export const metadata = {
-  title: 'About GlobalPlay - Independent Browser Game Directory',
-  description:
-    'Learn what GlobalPlay.games publishes, how the browser game catalog is organized, and how to contact the site publisher.',
-};

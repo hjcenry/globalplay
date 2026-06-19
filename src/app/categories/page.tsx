@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import GameCard from '@/components/GameCard';
-import { categories, games } from '@/data/games';
+import { getIndexableCategories, getIndexableCategoryCount, getIndexableGames } from '@/data/games';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 
 const categoryNotes: Record<string, { summary: string; bestFor: string }> = {
   action: {
@@ -29,13 +31,19 @@ const categoryNotes: Record<string, { summary: string; bestFor: string }> = {
   },
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Game Categories - GlobalPlay Games',
   description:
-    'Browse GlobalPlay game categories with practical notes, featured examples, and direct links to action, puzzle, strategy, racing, shooting, and adventure games.',
+    'Browse reviewed GlobalPlay game categories with practical notes, featured examples, and direct links to action, puzzle, strategy, racing, and adventure games.',
+  alternates: {
+    canonical: canonical('/categories'),
+  },
 };
 
 export default function CategoriesPage() {
+  const games = getIndexableGames();
+  const categories = getIndexableCategories();
+
   return (
     <>
       <div className="breadcrumb">
@@ -49,21 +57,20 @@ export default function CategoriesPage() {
           <div className="section-header">
             <h1 className="page-title">Game Categories</h1>
             <p className="page-description">
-              Browse {games.length} browser games by genre. Each category page includes playable titles, controls,
-              related games, and descriptions to help you decide what to launch next.
+              Browse {games.length} reviewed browser games by genre. Each category page includes playable titles,
+              controls, related games, and descriptions to help you decide what to launch next.
             </p>
           </div>
 
           <div className="categories-grid">
             {categories.map((category) => {
-              const categoryGames = games.filter((game) => game.category === category.id);
               const note = categoryNotes[category.id];
 
               return (
                 <Link key={category.id} href={`/categories/${category.id}`} className="category-card">
                   <div className="category-icon">{category.icon}</div>
                   <div className="category-name">{category.name}</div>
-                  <div className="category-count">{categoryGames.length} games</div>
+                  <div className="category-count">{getIndexableCategoryCount(category.id)} reviewed games</div>
                   <p className="category-summary">{note.summary}</p>
                 </Link>
               );

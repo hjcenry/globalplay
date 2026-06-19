@@ -1,5 +1,16 @@
 import Link from 'next/link';
+import { canonical } from '@/lib/seo';
+import type { Metadata } from 'next';
 import '../privacy/privacy.css';
+
+export const metadata: Metadata = {
+  title: 'Contact GlobalPlay - Support, Privacy, Legal, and Advertising',
+  description:
+    'Contact GlobalPlay.games for support, privacy questions, legal and rights-holder requests, advertising, or broken game reports.',
+  alternates: {
+    canonical: canonical('/contact'),
+  },
+};
 
 export default function ContactPage() {
   return (
@@ -84,9 +95,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
-export const metadata = {
-  title: 'Contact GlobalPlay - Support, Privacy, Legal, and Advertising',
-  description:
-    'Contact GlobalPlay.games for support, privacy questions, legal and rights-holder requests, advertising, or broken game reports.',
-};

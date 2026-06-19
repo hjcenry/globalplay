@@ -2290,56 +2290,45 @@ function enrichGame(game: GameInput): Game {
 
 export const games: Game[] = [...crazyGames, ...y8Games].map(enrichGame);
 
+function sortByQualitySignals(gameList: Game[]): Game[] {
+  return [...gameList].sort((a, b) => {
+    // 先按评分降序排序
+    if (a.rating !== b.rating) {
+      return b.rating - a.rating;
+    }
+    // 评分相同时，按游玩次数降序排序
+    return b.playCount - a.playCount;
+  });
+}
+
+export const getIndexableGames = (): Game[] => {
+  return sortByQualitySignals(games.filter(game => game.contentStatus === 'ready'));
+};
+
+export const getIndexableCategories = () => {
+  return categories.filter(category => getGamesByCategory(category.id).length > 0);
+};
+
+export const getIndexableCategoryCount = (categoryId: string): number => {
+  return getGamesByCategory(categoryId).length;
+};
+
 export const getFeaturedGames = (): Game[] => {
-  return games
-    .filter(game => game.featured)
-    .sort((a, b) => {
-      // 先按评分降序排序
-      if (a.rating !== b.rating) {
-        return b.rating - a.rating;
-      }
-      // 评分相同时，按游玩次数降序排序
-      return b.playCount - a.playCount;
-    });
+  return sortByQualitySignals(getIndexableGames().filter(game => game.featured));
 };
 
 export const getTrendingGames = (): Game[] => {
-  return games
-    .filter(game => game.trending)
-    .sort((a, b) => {
-      // 先按评分降序排序
-      if (a.rating !== b.rating) {
-        return b.rating - a.rating;
-      }
-      // 评分相同时，按游玩次数降序排序
-      return b.playCount - a.playCount;
-    });
+  return sortByQualitySignals(getIndexableGames().filter(game => game.trending));
 };
 
 export const getNewGames = (): Game[] => {
-  return games
-    .filter(game => game.isNew)
-    .sort((a, b) => {
-      // 先按评分降序排序
-      if (a.rating !== b.rating) {
-        return b.rating - a.rating;
-      }
-      // 评分相同时，按游玩次数降序排序
-      return b.playCount - a.playCount;
-    });
+  return sortByQualitySignals(getIndexableGames().filter(game => game.isNew));
 };
 
 export const getGamesByCategory = (categoryId: string): Game[] => {
-  return games
-    .filter(game => game.category === categoryId)
-    .sort((a, b) => {
-      // 先按评分降序排序
-      if (a.rating !== b.rating) {
-        return b.rating - a.rating;
-      }
-      // 评分相同时，按游玩次数降序排序
-      return b.playCount - a.playCount;
-    });
+  return sortByQualitySignals(
+    games.filter(game => game.category === categoryId && game.contentStatus === 'ready')
+  );
 };
 
 export const getGameBySlug = (category: string, slug: string): Game | undefined => {
@@ -2352,9 +2341,11 @@ export const getGameById = (id: string): Game | undefined => {
 
 export const searchGames = (query: string): Game[] => {
   const searchTerm = query.toLowerCase();
-  return games.filter(game => 
-    game.title.toLowerCase().includes(searchTerm) ||
-    game.description.toLowerCase().includes(searchTerm) ||
-    game.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+  return sortByQualitySignals(
+    getIndexableGames().filter(game =>
+      game.title.toLowerCase().includes(searchTerm) ||
+      game.description.toLowerCase().includes(searchTerm) ||
+      game.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+    )
   );
 };
